@@ -115,7 +115,8 @@ if(BUILD_TESTS)
 endif(BUILD_TESTS)
 
 # Install header files and library. 
-# Destination is set by CMAKE_INSTALL_PREFIX and defaults to usual locations, unless overridden by user.
+# Destination is set by CMAKE_INSTALL_PREFIX and defaults to usual locations, unless overridden by
+# user.
 install(DIRECTORY ${SOURCE_PATH} 
         DESTINATION include
         FILES_MATCHING PATTERN "*.hpp"
