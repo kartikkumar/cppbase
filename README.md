@@ -11,7 +11,7 @@ Requirements
 This project requires the following:
 
  - A C++ compiler, e.g., [GCC](https://gcc.gnu.org/), [clang](http://clang.llvm.org/), [MinGW](http://www.mingw.org/)
- - [`CMake`](http://www.cmake.org)
+ - [CMake](http://www.cmake.org)
 
 Installation
 ------
