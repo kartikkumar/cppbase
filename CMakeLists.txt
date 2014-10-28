@@ -1,5 +1,6 @@
 # Copyright (c) <year>, <author> (<email>)
-# All rights reserved.
+# Distributed under the MIT License.
+# See accompanying file LICENSE or copy at http://opensource.org/licenses/MIT
 
 cmake_minimum_required(VERSION 2.6)
 project(CppTemplate)

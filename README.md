@@ -33,6 +33,7 @@ Build options
 
 You can pass the follow command-line options when running `CMake`:
 
+ - `-DBUILD_MAIN=on`: build the main-function
  - `-DBUILD_DOCS=on`: build the [Doxygen](http://www.doxygen.org "Doxygen homepage") documentation
  - `-DBUILD_TESTS=on`: build tests (execute tests from build-directory using `make test`)
  - `-DBUILD_SHARED_LIBS=on`: build shared libraries instead of static
