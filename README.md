@@ -1,0 +1,62 @@
+CppTemplate
+===
+
+`CppTemplate` is a template for a simple C++ project. It can be used as the basis for new projects: remember to change all instances of `CppTemplate` to your new project name.
+
+[![Build Status](https://travis-ci.org/kartikkumar/cpp-template.svg?branch=master)](https://travis-ci.org/kartikkumar/cpp-template)
+
+Requirements
+------
+
+This project requires the following:
+
+ - A C++ compiler, e.g., [GCC](https://gcc.gnu.org/), [clang](http://clang.llvm.org/), [MinGW](http://www.mingw.org/)
+ - [`CMake`](http://www.cmake.org)
+
+Installation
+------
+
+Run the following commands to download and build this project.
+
+`git clone https://www.github.com/kartikkumar/cpp-template`
+`cd cpp-template`
+`git submodule init`
+`git submodule update`
+`mkdir build`
+`cd build`
+`cmake ..`
+`make`
+
+Build options
+-------------
+
+You can pass the follow command-line options when running `CMake`:
+
+ - `-DBUILD_DOCS=on`: build the [Doxygen](http://www.doxygen.org "Doxygen homepage") documentation
+ - `-DBUILD_TESTS=on`: build tests (execute tests from build-directory using `make test`)
+
+Contributing
+------------
+
+Once you've made your great commits:
+
+1. [Fork](https://github.com/kartikkumar/cpp-template/fork) cpp-template
+2. Create a topic branch - `git checkout -b my_branch`
+3. Push to your branch - `git push origin my_branch`
+4. Create a [Pull Request](http://help.github.com/pull-requests/) from your branch
+5. That's it!
+
+License
+------
+
+See `LICENSE`.
+
+Disclaimer
+------
+
+The copyright holders are not liable for any damage(s) incurred due to improper use of `CppTemplate`.
+
+Contact
+------
+
+Shoot an [email](mailto:me@kartikkumar.com?subject=CppTemplate) if you have any questions.
