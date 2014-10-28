@@ -18,16 +18,17 @@ Installation
 
 Run the following commands to download, build, and install this project.
 
-`git clone https://www.github.com/kartikkumar/cpp-template`
-`cd cpp-template`
-`git submodule init`
-`git submodule update`
-`mkdir build`
-`cd build`
-`cmake ..`
-`make`
-`make install`
-
+```
+git clone https://www.github.com/kartikkumar/cpp-template
+cd cpp-template
+git submodule init
+git submodule update
+mkdir build
+cd build
+cmake ..
+make
+make install
+```
 Build options
 -------------
 
