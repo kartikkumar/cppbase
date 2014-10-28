@@ -16,7 +16,7 @@ This project requires the following:
 Installation
 ------
 
-Run the following commands to download and build this project.
+Run the following commands to download, build, and install this project.
 
 `git clone https://www.github.com/kartikkumar/cpp-template`
 `cd cpp-template`
@@ -26,6 +26,7 @@ Run the following commands to download and build this project.
 `cd build`
 `cmake ..`
 `make`
+`make install`
 
 Build options
 -------------
@@ -34,6 +35,8 @@ You can pass the follow command-line options when running `CMake`:
 
  - `-DBUILD_DOCS=on`: build the [Doxygen](http://www.doxygen.org "Doxygen homepage") documentation
  - `-DBUILD_TESTS=on`: build tests (execute tests from build-directory using `make test`)
+ - `-DBUILD_SHARED_LIBS=on`: build shared libraries instead of static
+ - `-DCMAKE_INSTALL_PREFIX`: set path prefix for install script (`make install`)
 
 Contributing
 ------------
