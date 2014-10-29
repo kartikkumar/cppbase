@@ -59,7 +59,7 @@ Once you've made your great commits:
 License
 ------
 
-See `LICENSE`.
+See `LICENSE.md`.
 
 Disclaimer
 ------
