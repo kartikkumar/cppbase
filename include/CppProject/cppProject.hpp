@@ -4,9 +4,9 @@
  * See accompanying file LICENSE or copy at http://opensource.org/licenses/MIT
  */
 
-#ifndef CPP_TEMPLATE_HPP
-#define CPP_TEMPLATE_HPP
+#ifndef CPP_PROJECT_HPP
+#define CPP_PROJECT_HPP
 
-#include "CppTemplate/factorial.hpp"
+#include "CppProject/factorial.hpp"
 
-#endif // CPP_TEMPLATE_HPP
+#endif // CPP_PROJECT_HPP

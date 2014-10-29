@@ -6,9 +6,9 @@
 
 #include <stdexcept>
 
-#include "CppTemplate/factorial.hpp"
+#include "CppProject/factorial.hpp"
 
-namespace cpp_template
+namespace cpp_project
 {
 
 //! Compute factorial.
@@ -23,4 +23,4 @@ const int computeFactorial( const int integerNumber )
 }
 
 
-} // namespace cpp_template
+} // namespace cpp_project

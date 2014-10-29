@@ -6,9 +6,9 @@
 
 #include <catch.hpp>
 
-#include <CppTemplate/factorial.hpp>
+#include <CppProject/factorial.hpp>
 
-namespace cpp_template
+namespace cpp_project
 {
 namespace tests
 {
@@ -23,4 +23,4 @@ TEST_CASE( "Test factorial function", "[factorial]" )
 }
 
 } // namespace tests
-} // namespace cpp_template
+} // namespace cpp_project

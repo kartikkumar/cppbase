@@ -5,11 +5,12 @@
 cmake_minimum_required(VERSION 2.6)
 
 # Change this section to correspond with your project info.
-project(CppTemplate C CXX)
+project(CppProject C CXX)
 set(PROJECT_DESC                             "A template for a simple C++ project")
-set(PROJECT_UPPER                            "CPP_TEMPLATE")
-set(PROJECT_EXE                              "cpptemplate")
-set(PROJECT_LIB                              "cpp_template")
+set(PROJECT_UPPER                            "CPP_PROJECT")
+set(PROJECT_EXE                              "cpp_project_main")
+set(PROJECT_LIB                              "cpp_project")
+set(PROJECT_TEST                             "cpp_project")
 set(${CMAKE_PROJECT_NAME}_VENDOR_NAME        "Kartik Kumar")
 set(${CMAKE_PROJECT_NAME}_VENDOR_CONTACT     "me@kartikkumar.com")
 
@@ -146,13 +147,13 @@ if(BUILD_TESTS)
   endif(NOT APPLE)
 
   set(PROJECT_TESTS
-      "${TEST_SOURCE_PATH}/testCppTemplate.cpp"
+      "${TEST_SOURCE_PATH}/testCppProject.cpp"
       "${TEST_SOURCE_PATH}/testFactorial.cpp"      
   )
 
-  add_executable(${PROJECT_EXE}_tests ${PROJECT_TESTS})
-  target_link_libraries(${PROJECT_EXE}_tests ${PROJECT_LIB})
-  add_test(NAME ${PROJECT_EXE}_tests COMMAND "${TESTS_PATH}/${PROJECT_EXE}_tests")
+  add_executable(${PROJECT_TEST}_tests ${PROJECT_TESTS})
+  target_link_libraries(${PROJECT_TEST}_tests ${PROJECT_LIB})
+  add_test(NAME ${PROJECT_TEST}_tests COMMAND "${TESTS_PATH}/${PROJECT_TEST}_tests")
 endif(BUILD_TESTS)
 
 # Install header files and library. 

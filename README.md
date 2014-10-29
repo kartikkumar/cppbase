@@ -1,9 +1,9 @@
-CppTemplate
+CppProject
 ===
 
-[![MIT license](http://img.shields.io/badge/license-MIT-brightgreen.svg)](http://opensource.org/licenses/MIT) [![Build Status](https://travis-ci.org/kartikkumar/cpp-template.svg?branch=master)](https://travis-ci.org/kartikkumar/cpp-template)
+[![MIT license](http://img.shields.io/badge/license-MIT-brightgreen.svg)](http://opensource.org/licenses/MIT) [![Build Status](https://travis-ci.org/kartikkumar/cpp-project.svg?branch=master)](https://travis-ci.org/kartikkumar/cpp-project)
 
-`CppTemplate` is a template for a simple C++ project. It can be used as the basis for new projects: remember to change all instances of `CppTemplate` to your new project name.
+`CppProject` is a template for a simple C++ project. It can be used as the basis for new projects: remember to change all instances of `CppProject` to your new project name.
 
 Features
 ------
@@ -31,8 +31,9 @@ Installation
 
 Run the following commands to download, build, and install this project.
 
-    git clone https://www.github.com/kartikkumar/cpp-template
-    cd sml
+    git clone https://www.github.com/kartikkumar/cpp-project
+    cd cpp-project
+    git submodule init && git submodule update
     mkdir build
     cd build
     cmake ..
@@ -60,7 +61,7 @@ Contributing
 
 Once you've made your great commits:
 
-  1. [Fork](https://github.com/kartikkumar/cpp-template/fork) cpp-template
+  1. [Fork](https://github.com/kartikkumar/cpp-project/fork) cpp-project
   2. Create a topic branch - `git checkout -b my_branch`
   3. Push to your branch - `git push origin my_branch`
   4. Create a [Pull Request](http://help.github.com/pull-requests/) from your branch
@@ -74,12 +75,12 @@ See `LICENSE.md`.
 Disclaimer
 ------
 
-The copyright holders are not liable for any damage(s) incurred due to improper use of `CppTemplate`.
+The copyright holders are not liable for any damage(s) incurred due to improper use of `CppProject`.
 
 Contact
 ------
 
-Shoot an [email](mailto:me@kartikkumar.com?subject=CppTemplate) if you have any questions.
+Shoot an [email](mailto:me@kartikkumar.com?subject=CppProject) if you have any questions.
 
 TODO
 ------

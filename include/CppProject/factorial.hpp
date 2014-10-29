@@ -4,10 +4,10 @@
  * See accompanying file LICENSE or copy at http://opensource.org/licenses/MIT
  */
 
-#ifndef CPP_TEMPLATE_HPP
-#define CPP_TEMPLATE_HPP
+#ifndef CPP_PROJECT_HPP
+#define CPP_PROJECT_HPP
 
-namespace cpp_template
+namespace cpp_project
 {
 
 //! Compute factorial.
@@ -18,6 +18,6 @@ namespace cpp_template
  */
 const int computeFactorial( const int integerNumber );
 
-} // namespace cpp_template
+} // namespace cpp_project
 
-#endif // CPP_TEMPLATE_HPP
+#endif // CPP_PROJECT_HPP
