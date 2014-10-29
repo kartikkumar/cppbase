@@ -161,9 +161,7 @@ endif(BUILD_TESTS)
 # user.
 install(DIRECTORY ${INCLUDE_PATH}/${CMAKE_PROJECT_NAME} 
         DESTINATION include
-        FILES_MATCHING PATTERN "*.hpp"
-                       PATTERN "*.cpp" EXCLUDE
-                       PATTERN "Tests" EXCLUDE)
+        FILES_MATCHING PATTERN "*.hpp")
 install(FILES signature_${CMAKE_PROJECT_NAME} DESTINATION include/${CMAKE_PROJECT_NAME})
 install(TARGETS ${PROJECT_LIB} DESTINATION lib)
 
