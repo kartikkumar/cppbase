@@ -77,3 +77,4 @@ TODO
  - Find a way to have nested variables in Doxygen config file so that e.g., @@CMAKE_PROJECT_NAME@_VERSION@ works.
  - Add version detection in CMake module so that find_package respects minimum version required.
  - Find a better way to deal with external dependencies.
+ - Decide whether to include CMake modules as external project.
