@@ -5,6 +5,18 @@ CppTemplate
 
 `CppTemplate` is a template for a simple C++ project. It can be used as the basis for new projects: remember to change all instances of `CppTemplate` to your new project name.
 
+Features
+------
+
+ - General directory structure common to C++ projects
+ - Example of project CMake module
+ - Testing framework ([Catch](https://www.github.com/philsquared/Catch "Catch Github repository"))
+ - Install script (`make install`)
+ - CPack script for packaging (`make package`)
+ - Automatic API documentation ([Doxygen](http://www.doxygen.org "Doxygen homepage"))
+ - Continuous Integration ([Travis CI](https://travis-ci.org/ "Travis CI homepage"))
+ - Example of how to include external dependencies
+
 Requirements
 ------
 
@@ -78,3 +90,4 @@ TODO
  - Add version detection in CMake module so that find_package respects minimum version required.
  - Find a better way to deal with external dependencies.
  - Decide whether to include CMake modules as external project.
+ - Find a way to provide an option to clean installation.

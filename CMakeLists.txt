@@ -6,6 +6,7 @@ cmake_minimum_required(VERSION 2.6)
 
 # Change this section to correspond with your project info.
 project(CppTemplate C CXX)
+set(PROJECT_DESC                             "A template for a simple C++ project")
 set(PROJECT_UPPER                            "CPP_TEMPLATE")
 set(PROJECT_EXE                              "cpptemplate")
 set(PROJECT_LIB                              "cpp_template")
@@ -15,7 +16,7 @@ set(${CMAKE_PROJECT_NAME}_VENDOR_CONTACT     "me@kartikkumar.com")
 set(${CMAKE_PROJECT_NAME}_VERSION_MAJOR      0)
 set(${CMAKE_PROJECT_NAME}_VERSION_MINOR      1)
 set(${CMAKE_PROJECT_NAME}_VERSION_PATCH      0)
-set(CMAKE_PROJECT_VERSION            
+set(PROJECT_VERSION
     "${${CMAKE_PROJECT_NAME}_VERSION_MAJOR}.${${CMAKE_PROJECT_NAME}_VERSION_MINOR}.${${CMAKE_PROJECT_NAME}_VERSION_PATCH}")
 
 set(PROJECT_PATH                             "${CMAKE_CURRENT_SOURCE_DIR}")
