@@ -12,6 +12,8 @@ set(${CMAKE_PROJECT_NAME}_VENDOR_CONTACT     "me@kartikkumar.com")
 set(${CMAKE_PROJECT_NAME}_VERSION_MAJOR      0)
 set(${CMAKE_PROJECT_NAME}_VERSION_MINOR      1)
 set(${CMAKE_PROJECT_NAME}_VERSION_PATCH      0)
+set(CMAKE_PROJECT_VERSION            
+    "${${CMAKE_PROJECT_NAME}_VERSION_MAJOR}.${${CMAKE_PROJECT_NAME}_VERSION_MINOR}.${${CMAKE_PROJECT_NAME}_VERSION_PATCH}")
 
 set(PROJECT_PATH                             "${CMAKE_CURRENT_SOURCE_DIR}")
 set(EXTERNAL_PATH                            "${PROJECT_PATH}/external")
@@ -57,6 +59,11 @@ else()
   set(CMAKE_CXX_FLAGS 
       "${CMAKE_CXX_FLAGS} -Wall -Woverloaded-virtual -Wold-style-cast -Wnon-virtual-dtor")
 endif()
+
+# Allows for external dependencies to be built by CMake.
+include(ExternalProject)
+
+find_package(Git REQUIRED)
 
 include_directories(AFTER "${INCLUDE_PATH}")
 
@@ -108,7 +115,26 @@ if(BUILD_TESTS)
 
   set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${TESTS_PATH})
 
-  find_package(CATCH REQUIRED)
+  find_package(CATCH)
+
+  if(NOT CATCH_FOUND)
+    # Taken from docs/build-systems.md in the Catch project.
+    ExternalProject_Add(
+        catch
+        PREFIX ${EXTERNAL_PATH}/Catch
+        GIT_REPOSITORY https://github.com/philsquared/Catch.git
+        TIMEOUT 10
+        UPDATE_COMMAND ${GIT_EXECUTABLE} pull
+        CONFIGURE_COMMAND ""
+        BUILD_COMMAND ""
+        INSTALL_COMMAND ""
+        LOG_DOWNLOAD ON
+       )
+
+    ExternalProject_Get_Property(catch source_dir)
+    set(CATCH_INCLUDE_DIR ${source_dir}/include CACHE INTERNAL "Path to include folder for Catch")
+  endif(NOT CATCH_FOUND)
+  
   if(NOT APPLE)
     include_directories(SYSTEM AFTER "${CATCH_INCLUDE_DIR}")
   else(APPLE)
