@@ -3,10 +3,21 @@
 # See accompanying file LICENSE or copy at http://opensource.org/licenses/MIT
 
 cmake_minimum_required(VERSION 2.6)
-project(CppTemplate)
+
+project(CppTemplate C CXX)
+
+set(${CMAKE_PROJECT_NAME}_VENDOR_NAME        "Kartik Kumar")
+set(${CMAKE_PROJECT_NAME}_VENDOR_CONTACT     "me@kartikkumar.com")
+
+set(${CMAKE_PROJECT_NAME}_VERSION_MAJOR      0)
+set(${CMAKE_PROJECT_NAME}_VERSION_MINOR      1)
+set(${CMAKE_PROJECT_NAME}_VERSION_PATCH      0)
 
 set(PROJECT_PATH                             "${CMAKE_CURRENT_SOURCE_DIR}")
-set(SOURCE_PATH                              "${PROJECT_PATH}/${CMAKE_PROJECT_NAME}")
+set(EXTERNAL_PATH                            "${PROJECT_PATH}/external")
+set(INCLUDE_PATH                             "${PROJECT_PATH}/include")
+set(SOURCE_PATH                              "${PROJECT_PATH}/src")
+set(TEST_SOURCE_PATH                         "${PROJECT_PATH}/tests")
 set(CMAKE_MODULE_PATH  ${CMAKE_MODULE_PATH}  "${PROJECT_PATH}/cmake/Modules/")
 
 OPTION(BUILD_MAIN                            "Build main" OFF)
@@ -47,7 +58,7 @@ else()
       "${CMAKE_CXX_FLAGS} -Wall -Woverloaded-virtual -Wold-style-cast -Wnon-virtual-dtor")
 endif()
 
-include_directories(AFTER "${PROJECT_PATH}")
+include_directories(AFTER "${INCLUDE_PATH}")
 
 set(CPP_TEMPLATE_SOURCES
   "${SOURCE_PATH}/factorial.cpp"
@@ -105,8 +116,8 @@ if(BUILD_TESTS)
   endif(NOT APPLE)
 
   set(CPP_TEMPLATE_TESTS
-      "${SOURCE_PATH}/Tests/testCppTemplate.cpp"
-      "${SOURCE_PATH}/Tests/testFactorial.cpp"      
+      "${TEST_SOURCE_PATH}/testCppTemplate.cpp"
+      "${TEST_SOURCE_PATH}/testFactorial.cpp"      
   )
 
   add_executable(cpp_template_tests ${CPP_TEMPLATE_TESTS})
@@ -117,9 +128,29 @@ endif(BUILD_TESTS)
 # Install header files and library. 
 # Destination is set by CMAKE_INSTALL_PREFIX and defaults to usual locations, unless overridden by
 # user.
-install(DIRECTORY ${SOURCE_PATH} 
+install(DIRECTORY ${INCLUDE_PATH}/${CMAKE_PROJECT_NAME} 
         DESTINATION include
         FILES_MATCHING PATTERN "*.hpp"
                        PATTERN "*.cpp" EXCLUDE
                        PATTERN "Tests" EXCLUDE)
+install(FILES cpp_template_signature DESTINATION include/${CMAKE_PROJECT_NAME})
 install(TARGETS cpp_template DESTINATION lib)
+
+# Set up packager.
+set(CPACK_PACKAGE_DESCRIPTION_SUMMARY "${CMAKE_PROJECT_NAME}")
+set(CPACK_PACKAGE_VENDOR "${CMAKE_PROJECT_NAME}_VENDOR_NAME")
+set(CPACK_PACKAGE_DESCRIPTION_FILE "${PROJECT_PATH}/README.md")
+set(CPACK_RESOURCE_FILE_LICENSE "${PROJECT_PATH}/LICENSE.md")
+set(CPACK_PACKAGE_VERSION_MAJOR "${${CMAKE_PROJECT_NAME}_VERSION_MAJOR}")
+set(CPACK_PACKAGE_VERSION_MINOR "${${CMAKE_PROJECT_NAME}_VERSION_MINOR}")
+set(CPACK_PACKAGE_VERSION_PATCH "${${CMAKE_PROJECT_NAME}_VERSION_PATCH}")
+set(CPACK_PACKAGE_INSTALL_DIRECTORY "${CMAKE_PROJECT_NAME}")
+if(WIN32 AND NOT UNIX)
+  # There is a bug in NSI that does not handle full unix paths properly. Make
+  # sure there is at least one set of four (4) backlasshes.
+  set(CPACK_NSIS_DISPLAY_NAME "${CPACK_PACKAGE_INSTALL_DIRECTORY}")
+  set(CPACK_NSIS_CONTACT "${CMAKE_PROJECT_NAME}_VENDOR_CONTACT")
+  set(CPACK_NSIS_MODIFY_PATH ON)
+else(WIN32 AND NOT UNIX)
+endif(WIN32 AND NOT UNIX)
+include(CPack)

@@ -1,6 +1,0 @@
-[submodule "cmake"]
-	path = cmake
-	url = https://www.github.com/kartikkumar/cmake-modules
-[submodule "Catch"]
-	path = Catch
-	url = https://www.github.com/philSquared/Catch

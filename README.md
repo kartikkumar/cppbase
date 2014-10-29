@@ -1,34 +1,39 @@
 CppTemplate
 ===
 
-`CppTemplate` is a template for a simple C++ project. It can be used as the basis for new projects: remember to change all instances of `CppTemplate` to your new project name.
-
 [![Build Status](https://travis-ci.org/kartikkumar/cpp-template.svg?branch=master)](https://travis-ci.org/kartikkumar/cpp-template)
+
+`CppTemplate` is a template for a simple C++ project. It can be used as the basis for new projects: remember to change all instances of `CppTemplate` to your new project name.
 
 Requirements
 ------
 
 This project requires the following:
 
+ - [Git](http://git-scm.com)
  - A C++ compiler, e.g., [GCC](https://gcc.gnu.org/), [clang](http://clang.llvm.org/), [MinGW](http://www.mingw.org/)
  - [CMake](http://www.cmake.org)
 
 Installation
 ------
 
-Run the following commands to download, build, and install this project.
+Run the following commands to download, build this project.
 
 ```
 git clone https://www.github.com/kartikkumar/cpp-template
 cd cpp-template
-git submodule init
-git submodule update
 mkdir build
 cd build
 cmake ..
-make
+cmake --build .
+```
+
+To install the header files and libraries, run the following from within the `build` directory:
+
+```
 make install
 ```
+
 Build options
 -------------
 
@@ -38,7 +43,7 @@ You can pass the follow command-line options when running `CMake`:
  - `-DBUILD_DOCS=on`: build the [Doxygen](http://www.doxygen.org "Doxygen homepage") documentation
  - `-DBUILD_TESTS=on`: build tests (execute tests from build-directory using `make test`)
  - `-DBUILD_SHARED_LIBS=on`: build shared libraries instead of static
- - `-DCMAKE_INSTALL_PREFIX`: set path prefix for install script (`make install`)
+ - `-DCMAKE_INSTALL_PREFIX`: set path prefix for install script (`make install`); if not set, defaults to usual locations.
 
 Contributing
 ------------
