@@ -4,8 +4,11 @@
 
 cmake_minimum_required(VERSION 2.6)
 
+# Change this section to correspond with your project info.
 project(CppTemplate C CXX)
-
+set(PROJECT_UPPER                            "CPP_TEMPLATE")
+set(PROJECT_EXE                              "cpptemplate")
+set(PROJECT_LIB                              "cpp_template")
 set(${CMAKE_PROJECT_NAME}_VENDOR_NAME        "Kartik Kumar")
 set(${CMAKE_PROJECT_NAME}_VENDOR_CONTACT     "me@kartikkumar.com")
 
@@ -67,7 +70,7 @@ find_package(Git REQUIRED)
 
 include_directories(AFTER "${INCLUDE_PATH}")
 
-set(CPP_TEMPLATE_SOURCES
+set(PROJECT_UPPER_SOURCES
   "${SOURCE_PATH}/factorial.cpp"
 )
 
@@ -76,15 +79,15 @@ if(NOT LIB_PATH)
 endif(NOT LIB_PATH)
 set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${LIB_PATH})
 set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${LIB_PATH})
-add_library(cpp_template ${CPP_TEMPLATE_SOURCES})
+add_library(${PROJECT_LIB} ${PROJECT_UPPER_SOURCES})
 
 if(BUILD_MAIN)
   if(NOT BIN_PATH)
     set(BIN_PATH "${PROJECT_BINARY_DIR}/bin")
   endif(NOT BIN_PATH)
   set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${BIN_PATH})
-  add_executable(cpptemplate "${SOURCE_PATH}/main.cpp")
-  target_link_libraries(cpptemplate cpp_template)
+  add_executable(${PROJECT_EXE} "${SOURCE_PATH}/main.cpp")
+  target_link_libraries(${PROJECT_EXE} ${PROJECT_LIB})
 endif(BUILD_MAIN)
 
 if(BUILD_DOCS)
@@ -118,6 +121,7 @@ if(BUILD_TESTS)
   find_package(CATCH)
 
   if(NOT CATCH_FOUND)
+    message(STATUS "Catch will be downloaded when ${CMAKE_PROJECT_NAME} is built")
     # Taken from docs/build-systems.md in the Catch project.
     ExternalProject_Add(
         catch
@@ -141,14 +145,14 @@ if(BUILD_TESTS)
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -isystem \"${CATCH_INCLUDE_DIR}\"")
   endif(NOT APPLE)
 
-  set(CPP_TEMPLATE_TESTS
+  set(PROJECT_UPPER_TESTS
       "${TEST_SOURCE_PATH}/testCppTemplate.cpp"
       "${TEST_SOURCE_PATH}/testFactorial.cpp"      
   )
 
-  add_executable(cpp_template_tests ${CPP_TEMPLATE_TESTS})
-  target_link_libraries(cpp_template_tests cpp_template)
-  add_test(NAME cpp_template_tests COMMAND "${TESTS_PATH}/cpp_template_tests")
+  add_executable(${PROJECT_EXE}_tests ${PROJECT_UPPER_TESTS})
+  target_link_libraries(${PROJECT_EXE}_tests ${PROJECT_LIB})
+  add_test(NAME ${PROJECT_EXE}_tests COMMAND "${TESTS_PATH}/${PROJECT_EXE}_tests")
 endif(BUILD_TESTS)
 
 # Install header files and library. 
@@ -159,8 +163,8 @@ install(DIRECTORY ${INCLUDE_PATH}/${CMAKE_PROJECT_NAME}
         FILES_MATCHING PATTERN "*.hpp"
                        PATTERN "*.cpp" EXCLUDE
                        PATTERN "Tests" EXCLUDE)
-install(FILES cpp_template_signature DESTINATION include/${CMAKE_PROJECT_NAME})
-install(TARGETS cpp_template DESTINATION lib)
+install(FILES ${CMAKE_PROJECT_NAME}_signature DESTINATION include/${CMAKE_PROJECT_NAME})
+install(TARGETS ${PROJECT_LIB} DESTINATION lib)
 
 # Set up packager.
 set(CPACK_PACKAGE_DESCRIPTION_SUMMARY "${CMAKE_PROJECT_NAME}")
