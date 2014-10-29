@@ -123,13 +123,12 @@ if(BUILD_TESTS)
 
   if(NOT CATCH_FOUND)
     message(STATUS "Catch will be downloaded when ${CMAKE_PROJECT_NAME} is built")
-    # Taken from docs/build-systems.md in the Catch project.
     ExternalProject_Add(
         catch
         PREFIX ${EXTERNAL_PATH}/Catch
-        GIT_REPOSITORY https://github.com/philsquared/Catch.git
+        URL https://github.com/philsquared/Catch/archive/master.zip
         TIMEOUT 10
-        UPDATE_COMMAND ${GIT_EXECUTABLE} pull
+        UPDATE_COMMAND ""
         CONFIGURE_COMMAND ""
         BUILD_COMMAND ""
         INSTALL_COMMAND ""
