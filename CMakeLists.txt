@@ -39,11 +39,11 @@ elseif(CMAKE_BUILD_TYPE STREQUAL "Debug")
     set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -pg")
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -pg")
     set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -pg")
-endif()
+endif((NOT CMAKE_BUILD_TYPE) OR (CMAKE_BUILD_TYPE STREQUAL "Release"))
 
 # Set platform-specific compiler flags.
-if (WIN32)
-  if (MSVC)
+if(WIN32)
+  if(MSVC)
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /EHsc /Ox /W3 /FC -D_SCL_SECURE_NO_WARNINGS")
     # We need to force MSVC to use static runtime: 
     # (from http://www.cmake.org/Wiki/CMake_FAQ#Dynamic_Replace).
@@ -55,14 +55,14 @@ if (WIN32)
         string(REGEX REPLACE "/MD" "/MT" ${flag_var} "${${flag_var}}")
       endif(${flag_var} MATCHES "/MD")
     endforeach(flag_var)
-  else()
+  else(MSVC)
     set(CMAKE_CXX_FLAGS 
         "${CMAKE_CXX_FLAGS} -Wall -Woverloaded-virtual -Wold-style-cast -Wnon-virtual-dtor")
-  endif()
-else()
+  endif(MSVC)
+else(WIN32)
   set(CMAKE_CXX_FLAGS 
       "${CMAKE_CXX_FLAGS} -Wall -Woverloaded-virtual -Wold-style-cast -Wnon-virtual-dtor")
-endif()
+endif(WIN32)
 
 # Allows for external dependencies to be built by CMake.
 include(ExternalProject)
@@ -71,8 +71,8 @@ find_package(Git REQUIRED)
 
 include_directories(AFTER "${INCLUDE_PATH}")
 
-set(PROJECT_UPPER_SOURCES
-  "${SOURCE_PATH}/factorial.cpp"
+set(PROJECT_SOURCES
+    "${SOURCE_PATH}/factorial.cpp"
 )
 
 if(NOT LIB_PATH)
@@ -80,7 +80,7 @@ if(NOT LIB_PATH)
 endif(NOT LIB_PATH)
 set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${LIB_PATH})
 set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${LIB_PATH})
-add_library(${PROJECT_LIB} ${PROJECT_UPPER_SOURCES})
+add_library(${PROJECT_LIB} ${PROJECT_SOURCES})
 
 if(BUILD_MAIN)
   if(NOT BIN_PATH)
@@ -146,12 +146,12 @@ if(BUILD_TESTS)
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -isystem \"${CATCH_INCLUDE_DIR}\"")
   endif(NOT APPLE)
 
-  set(PROJECT_UPPER_TESTS
+  set(PROJECT_TESTS
       "${TEST_SOURCE_PATH}/testCppTemplate.cpp"
       "${TEST_SOURCE_PATH}/testFactorial.cpp"      
   )
 
-  add_executable(${PROJECT_EXE}_tests ${PROJECT_UPPER_TESTS})
+  add_executable(${PROJECT_EXE}_tests ${PROJECT_TESTS})
   target_link_libraries(${PROJECT_EXE}_tests ${PROJECT_LIB})
   add_test(NAME ${PROJECT_EXE}_tests COMMAND "${TESTS_PATH}/${PROJECT_EXE}_tests")
 endif(BUILD_TESTS)
