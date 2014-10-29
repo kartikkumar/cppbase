@@ -9,7 +9,7 @@ else (CPP_TEMPLATE_INCLUDE_DIRS)
 
   find_path(CPP_TEMPLATE_INCLUDE_DIR
     NAMES
-      cpp_template_signature
+      signature_CppTemplate
     PATHS
       /usr/include
       /usr/local/include

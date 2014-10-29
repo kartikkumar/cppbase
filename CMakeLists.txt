@@ -164,7 +164,7 @@ install(DIRECTORY ${INCLUDE_PATH}/${CMAKE_PROJECT_NAME}
         FILES_MATCHING PATTERN "*.hpp"
                        PATTERN "*.cpp" EXCLUDE
                        PATTERN "Tests" EXCLUDE)
-install(FILES ${CMAKE_PROJECT_NAME}_signature DESTINATION include/${CMAKE_PROJECT_NAME})
+install(FILES signature_${CMAKE_PROJECT_NAME} DESTINATION include/${CMAKE_PROJECT_NAME})
 install(TARGETS ${PROJECT_LIB} DESTINATION lib)
 
 # Set up packager.
