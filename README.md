@@ -69,7 +69,7 @@ Contributing
 
 Once you've made your great commits:
 
-  1. [Fork](https://github.com/kartikkumar/cpp-project/fork) cpp-project
+  1. [Fork](https://github.com/kartikkumar/cpp-project/fork) `CppProject`
   2. Create a topic branch - `git checkout -b my_branch`
   3. Push to your branch - `git push origin my_branch`
   4. Create a [Pull Request](http://help.github.com/pull-requests/) from your branch
@@ -93,7 +93,7 @@ Shoot an [email](mailto:me@kartikkumar.com?subject=CppProject) if you have any q
 TODO
 ------
 
-  - Find a way to have nested variables in Doxygen config file so that e.g., `@@CMAKE_PROJECT_NAME@_VERSION@` works.
-  - Add version detection in CMake module so that find_package respects minimum version required.
+  - Find a way to have nested variables in `Doxygen` config file so that e.g., `@@CMAKE_PROJECT_NAME@_VERSION@` works.
+  - Add version detection in `CMake` module so that find_package respects minimum version required.
   - Find a way to provide an option to clean installation.
   - Write a script that renames this template project to a custom name for a new project provided by the user (e.g. a bash script).
