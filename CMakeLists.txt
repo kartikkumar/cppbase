@@ -162,7 +162,6 @@ endif(BUILD_TESTS)
 install(DIRECTORY ${INCLUDE_PATH}/${CMAKE_PROJECT_NAME} 
         DESTINATION include
         FILES_MATCHING PATTERN "*.hpp")
-install(FILES signature_${CMAKE_PROJECT_NAME} DESTINATION include/${CMAKE_PROJECT_NAME})
 install(TARGETS ${PROJECT_LIB} DESTINATION lib)
 
 # Set up packager.
