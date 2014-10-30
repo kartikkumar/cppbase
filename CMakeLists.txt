@@ -137,13 +137,13 @@ if(BUILD_TESTS)
        )
 
     ExternalProject_Get_Property(catch source_dir)
-    set(CATCH_INCLUDE_DIR ${source_dir}/include CACHE INTERNAL "Path to include folder for Catch")
+    set(CATCH_INCLUDE_DIRS ${source_dir}/include CACHE INTERNAL "Path to include folder for Catch")
   endif(NOT CATCH_FOUND)
   
   if(NOT APPLE)
-    include_directories(SYSTEM AFTER "${CATCH_INCLUDE_DIR}")
+    include_directories(SYSTEM AFTER "${CATCH_INCLUDE_DIRS}")
   else(APPLE)
-    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -isystem \"${CATCH_INCLUDE_DIR}\"")
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -isystem \"${CATCH_INCLUDE_DIRS}\"")
   endif(NOT APPLE)
 
   set(PROJECT_TESTS
