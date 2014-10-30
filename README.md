@@ -20,11 +20,18 @@ Features
 Requirements
 ------
 
-This project requires the following:
+To install this project, please ensure that you have installed the following (install guides are provided on the respective websites):
 
   - [Git](http://git-scm.com)
   - A C++ compiler, e.g., [GCC](https://gcc.gnu.org/), [clang](http://clang.llvm.org/), [MinGW](http://www.mingw.org/)
   - [CMake](http://www.cmake.org)
+  - [Doxygen](http://www.doxygen.org "Doxygen homepage") (optional)
+
+In addition, `CppProject` depends on the following libraries:
+
+  - [CATCH](https://www.github.com/philsquared/Catch)
+
+These dependencies will be downloaded and configured automatically if they are not already present locally (requires an internet connection).
 
 Installation
 ------
@@ -54,7 +61,8 @@ You can pass the follow command-line options when running `CMake`:
   - `-DBUILD_DOCS=on`: build the [Doxygen](http://www.doxygen.org "Doxygen homepage") documentation ([LaTeX](http://www.latex-project.org/) must be installed)
   - `-DBUILD_TESTS=on`: build tests (execute tests from build-directory using `make test`)
   - `-DBUILD_SHARED_LIBS=on`: build shared libraries instead of static
-  - `-DCMAKE_INSTALL_PREFIX`: set path prefix for install script (`make install`); if not set, defaults to usual locations.
+  - `-DCMAKE_INSTALL_PREFIX`: set path prefix for install script (`make install`); if not set, defaults to usual locations
+  - `-FIND_DEPEND=off`: switch off automatic search for dependencies locally using `find_package()`
 
 Contributing
 ------------
@@ -87,6 +95,5 @@ TODO
 
   - Find a way to have nested variables in Doxygen config file so that e.g., `@@CMAKE_PROJECT_NAME@_VERSION@` works.
   - Add version detection in CMake module so that find_package respects minimum version required.
-  - Find a better way to deal with external dependencies.
-  - Decide whether to include CMake modules as external project.
   - Find a way to provide an option to clean installation.
+  - Write a script that renames this template project to a custom name for a new project provided by the user (e.g. a bash script).
