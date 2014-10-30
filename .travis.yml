@@ -13,7 +13,7 @@ before_install:
 install:
   - mkdir build
   - cd build
-  - cmake -DCMAKE_BUILD_TYPE=$BUILD_TYPE -DBUILD_TESTS=on ..
+  - cmake -DCMAKE_BUILD_TYPE=$BUILD_TYPE -DBUILD_TESTS=on -DFIND_DEPEND=off ..
   - make
   - cd ..
 
