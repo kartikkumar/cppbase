@@ -128,7 +128,7 @@ if(BUILD_TESTS)
         catch
         PREFIX ${EXTERNAL_PATH}/Catch
         URL https://github.com/philsquared/Catch/archive/master.zip
-        TIMEOUT 10
+        TIMEOUT 30
         UPDATE_COMMAND ""
         CONFIGURE_COMMAND ""
         BUILD_COMMAND ""
