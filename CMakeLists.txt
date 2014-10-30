@@ -6,31 +6,44 @@ cmake_minimum_required(VERSION 2.6)
 
 # Change this section to correspond with your project info.
 project(CppProject C CXX)
-set(PROJECT_DESC                             "A template for a simple C++ project")
-set(PROJECT_UPPER                            "CPP_PROJECT")
-set(PROJECT_EXE                              "cpp_project_main")
-set(PROJECT_LIB                              "cpp_project")
-set(PROJECT_TEST                             "cpp_project")
+set(MYPROJ_DESC                              "A template for a simple C++ project")
+set(MYPROJ_UPPER                             "CPP_PROJECT")
+set(MYPROJ_EXE                               "cpp_proj_main")
+set(MYPROJ_LIB                               "cpp_proj")
+set(MYPROJ_TEST                              "test_cpp_proj")
 set(${CMAKE_PROJECT_NAME}_VENDOR_NAME        "Kartik Kumar")
 set(${CMAKE_PROJECT_NAME}_VENDOR_CONTACT     "me@kartikkumar.com")
 
 set(${CMAKE_PROJECT_NAME}_VERSION_MAJOR      0)
 set(${CMAKE_PROJECT_NAME}_VERSION_MINOR      1)
 set(${CMAKE_PROJECT_NAME}_VERSION_PATCH      0)
-set(PROJECT_VERSION
-    "${${CMAKE_PROJECT_NAME}_VERSION_MAJOR}.${${CMAKE_PROJECT_NAME}_VERSION_MINOR}.${${CMAKE_PROJECT_NAME}_VERSION_PATCH}")
+set(MYPROJ_VERSION
+  "${${CMAKE_PROJECT_NAME}_VERSION_MAJOR}.${${CMAKE_PROJECT_NAME}_VERSION_MINOR}.${${CMAKE_PROJECT_NAME}_VERSION_PATCH}")
 
-set(PROJECT_PATH                             "${CMAKE_CURRENT_SOURCE_DIR}")
-set(EXTERNAL_PATH                            "${PROJECT_PATH}/external")
-set(INCLUDE_PATH                             "${PROJECT_PATH}/include")
-set(SOURCE_PATH                              "${PROJECT_PATH}/src")
-set(TEST_SOURCE_PATH                         "${PROJECT_PATH}/tests")
-set(CMAKE_MODULE_PATH  ${CMAKE_MODULE_PATH}  "${PROJECT_PATH}/cmake/Modules/")
+set(MYPROJ_PATH                              "${CMAKE_CURRENT_SOURCE_DIR}")
+set(MYEXT_PATH                               "${MYPROJ_PATH}/external")
+set(MYINC_PATH                               "${MYPROJ_PATH}/include")
+set(MYSRC_PATH                               "${MYPROJ_PATH}/src")
+set(MYTEST_SRC_PATH                          "${MYPROJ_PATH}/tests")
+set(MYCMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${MYPROJ_PATH}/cmake/Modules")
 
 OPTION(BUILD_MAIN                            "Build main" OFF)
 OPTION(BUILD_DOCS                            "Build docs" OFF)
 OPTION(BUILD_TESTS                           "Build tests" OFF)
 OPTION(FIND_DEPEND                           "Find locally-installed dependencies" ON)
+
+set(MYPROJ_SRC
+  "${MYSRC_PATH}/factorial.cpp"
+)
+
+set(MYPROJ_EXE_SRC
+  "${MYSRC_PATH}/main.cpp"
+)
+
+set(MYPROJ_TEST_SRC
+  "${MYTEST_SRC_PATH}/testCppProject.cpp"
+  "${MYTEST_SRC_PATH}/testFactorial.cpp"      
+)
 
 # Set CMake build-type. If it not supplied by the user, the default built type is "Release". 
 if((NOT CMAKE_BUILD_TYPE) OR (CMAKE_BUILD_TYPE STREQUAL "Release"))
@@ -50,8 +63,8 @@ if(WIN32)
     # We need to force MSVC to use static runtime: 
     # (from http://www.cmake.org/Wiki/CMake_FAQ#Dynamic_Replace).
     foreach(flag_var
-          CMAKE_CXX_FLAGS CMAKE_CXX_FLAGS_DEBUG CMAKE_CXX_FLAGS_RELEASE
-          CMAKE_CXX_FLAGS_MINSIZEREL CMAKE_CXX_FLAGS_RELWITHDEBINFO)
+      CMAKE_CXX_FLAGS CMAKE_CXX_FLAGS_DEBUG CMAKE_CXX_FLAGS_RELEASE
+      CMAKE_CXX_FLAGS_MINSIZEREL CMAKE_CXX_FLAGS_RELWITHDEBINFO)
       # Find all dynamic runtime (MD) references and replace with static (MT)
       if(${flag_var} MATCHES "/MD")
         string(REGEX REPLACE "/MD" "/MT" ${flag_var} "${${flag_var}}")
@@ -59,36 +72,32 @@ if(WIN32)
     endforeach(flag_var)
   else(MSVC)
     set(CMAKE_CXX_FLAGS 
-        "${CMAKE_CXX_FLAGS} -Wall -Woverloaded-virtual -Wold-style-cast -Wnon-virtual-dtor")
+      "${CMAKE_CXX_FLAGS} -Wall -Woverloaded-virtual -Wold-style-cast -Wnon-virtual-dtor")
   endif(MSVC)
 else(WIN32)
   set(CMAKE_CXX_FLAGS 
-      "${CMAKE_CXX_FLAGS} -Wall -Woverloaded-virtual -Wold-style-cast -Wnon-virtual-dtor")
+    "${CMAKE_CXX_FLAGS} -Wall -Woverloaded-virtual -Wold-style-cast -Wnon-virtual-dtor")
 endif(WIN32)
 
 # Allows for external dependencies to be built by CMake.
 include(ExternalProject)
 
-include_directories(AFTER "${INCLUDE_PATH}")
+include_directories(AFTER "${MYINC_PATH}")
 
-set(PROJECT_SOURCES
-    "${SOURCE_PATH}/factorial.cpp"
-)
-
-if(NOT LIB_PATH)
-  set(LIB_PATH "${PROJECT_BINARY_DIR}/lib")
-endif(NOT LIB_PATH)
-set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${LIB_PATH})
-set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${LIB_PATH})
-add_library(${PROJECT_LIB} ${PROJECT_SOURCES})
+if(NOT MYLIB_PATH)
+  set(MYLIB_PATH "${PROJECT_BINARY_DIR}/lib")
+endif(NOT MYLIB_PATH)
+set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${MYLIB_PATH})
+set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${MYLIB_PATH})
+add_library(${MYPROJ_LIB} ${MYPROJ_SRC})
 
 if(BUILD_MAIN)
-  if(NOT BIN_PATH)
-    set(BIN_PATH "${PROJECT_BINARY_DIR}/bin")
-  endif(NOT BIN_PATH)
-  set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${BIN_PATH})
-  add_executable(${PROJECT_EXE} "${SOURCE_PATH}/main.cpp")
-  target_link_libraries(${PROJECT_EXE} ${PROJECT_LIB})
+  if(NOT MYBIN_PATH)
+    set(MYBIN_PATH "${PROJECT_BINARY_DIR}/bin")
+  endif(NOT MYBIN_PATH)
+  set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${MYBIN_PATH})
+  add_executable(${MYPROJ_EXE} ${MYPROJ_EXE_SRC})
+  target_link_libraries(${MYPROJ_EXE} ${MYPROJ_LIB})
 endif(BUILD_MAIN)
 
 if(BUILD_DOCS)
@@ -99,7 +108,7 @@ if(BUILD_DOCS)
             "Doxygen is needed to build the documentation. Please make sure it is installed.")
   endif(NOT DOXYGEN_FOUND)
 
-  configure_file(${PROJECT_PATH}/Doxyfile.in 
+  configure_file(${MYPROJ_PATH}/Doxyfile.in 
                  ${PROJECT_BINARY_DIR}/Doxyfile @ONLY IMMEDIATE)
 
   # Add a custom target to run Doxygen whenever the project is built.
@@ -113,11 +122,11 @@ endif(BUILD_DOCS)
 if(BUILD_TESTS)
   enable_testing()
 
-  if(NOT TESTS_PATH)
-    set(TESTS_PATH "${PROJECT_BINARY_DIR}/tests")
-  endif(NOT TESTS_PATH)
+  if(NOT MYTESTS_PATH)
+    set(MYTESTS_PATH "${PROJECT_BINARY_DIR}/tests")
+  endif(NOT MYTESTS_PATH)
 
-  set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${TESTS_PATH})
+  set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${MYTESTS_PATH})
 
   if(FIND_DEPEND)
     find_package(CATCH)
@@ -127,13 +136,20 @@ if(BUILD_TESTS)
     message(STATUS "Catch will be downloaded when ${CMAKE_PROJECT_NAME} is built")
     ExternalProject_Add(
         catch
-        PREFIX ${EXTERNAL_PATH}/Catch
+        PREFIX ${MYEXT_PATH}/Catch
+        #--Download step--------------
         URL https://github.com/philsquared/Catch/archive/master.zip
         TIMEOUT 30
+        #--Update/Patch step----------
         UPDATE_COMMAND ""
+        PATCH_COMMAND ""
+        #--Configure step-------------
         CONFIGURE_COMMAND ""
+        #--Build step-----------------
         BUILD_COMMAND ""
+        #--Install step---------------
         INSTALL_COMMAND ""
+        #--Output logging-------------
         LOG_DOWNLOAD ON
        )
 
@@ -147,29 +163,24 @@ if(BUILD_TESTS)
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -isystem \"${CATCH_INCLUDE_DIRS}\"")
   endif(NOT APPLE)
 
-  set(PROJECT_TESTS
-      "${TEST_SOURCE_PATH}/testCppProject.cpp"
-      "${TEST_SOURCE_PATH}/testFactorial.cpp"      
-  )
-
-  add_executable(${PROJECT_TEST}_tests ${PROJECT_TESTS})
-  target_link_libraries(${PROJECT_TEST}_tests ${PROJECT_LIB})
-  add_test(NAME ${PROJECT_TEST}_tests COMMAND "${TESTS_PATH}/${PROJECT_TEST}_tests")
+  add_executable(${MYPROJ_TEST} ${MYPROJ_TEST_SRC})
+  target_link_libraries(${MYPROJ_TEST} ${MYPROJ_LIB})
+  add_test(NAME ${MYPROJ_TEST} COMMAND "${MYTESTS_PATH}/${MYPROJ_TEST}")
 endif(BUILD_TESTS)
 
 # Install header files and library. 
 # Destination is set by CMAKE_INSTALL_PREFIX and defaults to usual locations, unless overridden by
 # user.
-install(DIRECTORY ${INCLUDE_PATH}/${CMAKE_PROJECT_NAME} 
+install(DIRECTORY ${MYINC_PATH}/${CMAKE_PROJECT_NAME} 
         DESTINATION include
         FILES_MATCHING PATTERN "*.hpp")
-install(TARGETS ${PROJECT_LIB} DESTINATION lib)
+install(TARGETS ${MYPROJ_LIB} DESTINATION lib)
 
 # Set up packager.
 set(CPACK_PACKAGE_DESCRIPTION_SUMMARY "${CMAKE_PROJECT_NAME}")
 set(CPACK_PACKAGE_VENDOR "${CMAKE_PROJECT_NAME}_VENDOR_NAME")
-set(CPACK_PACKAGE_DESCRIPTION_FILE "${PROJECT_PATH}/README.md")
-set(CPACK_RESOURCE_FILE_LICENSE "${PROJECT_PATH}/LICENSE.md")
+set(CPACK_PACKAGE_DESCRIPTION_FILE "${MYPROJ_PATH}/README.md")
+set(CPACK_RESOURCE_FILE_LICENSE "${MYPROJ_PATH}/LICENSE.md")
 set(CPACK_PACKAGE_VERSION_MAJOR "${${CMAKE_PROJECT_NAME}_VERSION_MAJOR}")
 set(CPACK_PACKAGE_VERSION_MINOR "${${CMAKE_PROJECT_NAME}_VERSION_MINOR}")
 set(CPACK_PACKAGE_VERSION_PATCH "${${CMAKE_PROJECT_NAME}_VERSION_PATCH}")
