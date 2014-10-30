@@ -62,7 +62,7 @@ You can pass the follow command-line options when running `CMake`:
   - `-DBUILD_TESTS=on`: build tests (execute tests from build-directory using `make test`)
   - `-DBUILD_SHARED_LIBS=on`: build shared libraries instead of static
   - `-DCMAKE_INSTALL_PREFIX`: set path prefix for install script (`make install`); if not set, defaults to usual locations
-  - `-FIND_DEPEND=off`: switch off automatic search for dependencies locally using `find_package()`
+  - `-DFIND_DEPEND=off`: switch off automatic search for dependencies locally using `find_package()`
 
 Contributing
 ------------
