@@ -1,6 +1,6 @@
 # Copyright (c) <year> <author> (<email>)
 # Distributed under the MIT License.
-# See accompanying file LICENSE or copy at http://opensource.org/licenses/MIT
+# See accompanying file LICENSE.md or copy at http://opensource.org/licenses/MIT
 
 cmake_minimum_required(VERSION 2.6)
 
@@ -30,7 +30,7 @@ set(MYCMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${MYPROJ_PATH}/cmake/Modules")
 OPTION(BUILD_MAIN                            "Build main" OFF)
 OPTION(BUILD_DOCS                            "Build docs" OFF)
 OPTION(BUILD_TESTS                           "Build tests" OFF)
-OPTION(FIND_DEPEND                           "Find locally-installed dependencies" ON)
+OPTION(BUILD_DEPENDENCIES                    "Build dependencies for current build" OFF)
 
 set(MYPROJ_SRC
   "${MYSRC_PATH}/factorial.cpp"
@@ -79,10 +79,10 @@ else(WIN32)
     "${CMAKE_CXX_FLAGS} -Wall -Woverloaded-virtual -Wold-style-cast -Wnon-virtual-dtor")
 endif(WIN32)
 
-# Allows for external dependencies to be built by CMake.
-include(ExternalProject)
-
 include_directories(AFTER "${MYINC_PATH}")
+
+# Include script to build external library with CMake.
+include(ExternalProject)
 
 if(NOT MYLIB_PATH)
   set(MYLIB_PATH "${PROJECT_BINARY_DIR}/lib")
@@ -128,31 +128,29 @@ if(BUILD_TESTS)
 
   set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${MYTESTS_PATH})
 
-  if(FIND_DEPEND)
+  if(NOT BUILD_DEPENDENCIES)
     find_package(CATCH)
-  endif(FIND_DEPEND)
+  endif(NOT BUILD_DEPENDENCIES)
 
   if(NOT CATCH_FOUND)
     message(STATUS "Catch will be downloaded when ${CMAKE_PROJECT_NAME} is built")
-    ExternalProject_Add(
-        catch
-        PREFIX ${MYEXT_PATH}/Catch
-        #--Download step--------------
-        URL https://github.com/philsquared/Catch/archive/master.zip
-        TIMEOUT 30
-        #--Update/Patch step----------
-        UPDATE_COMMAND ""
-        PATCH_COMMAND ""
-        #--Configure step-------------
-        CONFIGURE_COMMAND ""
-        #--Build step-----------------
-        BUILD_COMMAND ""
-        #--Install step---------------
-        INSTALL_COMMAND ""
-        #--Output logging-------------
-        LOG_DOWNLOAD ON
-       )
-
+    ExternalProject_Add(catch
+      PREFIX ${MYEXT_PATH}/Catch  
+      #--Download step--------------
+      URL https://github.com/kartikkumar/Catch/archive/master.zip
+      TIMEOUT 30
+      #--Update/Patch step----------
+      UPDATE_COMMAND ""
+      PATCH_COMMAND ""
+      #--Configure step-------------             
+      CONFIGURE_COMMAND ""
+      #--Build step-----------------      
+      BUILD_COMMAND ""
+      #--Install step---------------      
+      INSTALL_COMMAND ""
+      #--Output logging-------------      
+      LOG_DOWNLOAD ON
+    )
     ExternalProject_Get_Property(catch source_dir)
     set(CATCH_INCLUDE_DIRS ${source_dir}/include CACHE INTERNAL "Path to include folder for Catch")
   endif(NOT CATCH_FOUND)
@@ -161,7 +159,7 @@ if(BUILD_TESTS)
     include_directories(SYSTEM AFTER "${CATCH_INCLUDE_DIRS}")
   else(APPLE)
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -isystem \"${CATCH_INCLUDE_DIRS}\"")
-  endif(NOT APPLE)
+  endif(NOT APPLE)  
 
   add_executable(${MYPROJ_TEST} ${MYPROJ_TEST_SRC})
   target_link_libraries(${MYPROJ_TEST} ${MYPROJ_LIB})
@@ -175,6 +173,14 @@ install(DIRECTORY ${MYINC_PATH}/${CMAKE_PROJECT_NAME}
         DESTINATION include
         FILES_MATCHING PATTERN "*.hpp")
 install(TARGETS ${MYPROJ_LIB} DESTINATION lib)
+
+# Install header files and library. 
+# Destination is set by CMAKE_INSTALL_PREFIX and defaults to usual locations, unless overridden by
+# user.
+install(DIRECTORY ${MYINC_PATH}/${CMAKE_PROJECT_NAME} 
+        DESTINATION include
+        FILES_MATCHING PATTERN "*.hpp")
+#install(TARGETS ${MYPROJ_LIB} DESTINATION lib)
 
 # Set up packager.
 set(CPACK_PACKAGE_DESCRIPTION_SUMMARY "${CMAKE_PROJECT_NAME}")

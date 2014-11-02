@@ -33,6 +33,7 @@ bin
 lib
 docs
 test
+temp
 debug
 external
 
