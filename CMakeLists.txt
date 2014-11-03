@@ -25,12 +25,12 @@ set(MYEXT_PATH                               "${MYPROJ_PATH}/external")
 set(MYINC_PATH                               "${MYPROJ_PATH}/include")
 set(MYSRC_PATH                               "${MYPROJ_PATH}/src")
 set(MYTEST_SRC_PATH                          "${MYPROJ_PATH}/tests")
-set(MYCMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${MYPROJ_PATH}/cmake/Modules")
+set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH}   "${MYPROJ_PATH}/cmake/Modules")
 
 OPTION(BUILD_MAIN                            "Build main" OFF)
 OPTION(BUILD_DOCS                            "Build docs" OFF)
 OPTION(BUILD_TESTS                           "Build tests" OFF)
-OPTION(BUILD_DEPENDENCIES                    "Build dependencies for current build" OFF)
+OPTION(FORCE_DEPENDENCIES_BUILD              "Force build of dependencies" OFF)
 
 set(MYPROJ_SRC
   "${MYSRC_PATH}/factorial.cpp"
@@ -128,9 +128,9 @@ if(BUILD_TESTS)
 
   set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${MYTESTS_PATH})
 
-  if(NOT BUILD_DEPENDENCIES)
+  if(NOT FORCE_DEPENDENCIES_BUILD)
     find_package(CATCH)
-  endif(NOT BUILD_DEPENDENCIES)
+  endif(NOT FORCE_DEPENDENCIES_BUILD)
 
   if(NOT CATCH_FOUND)
     message(STATUS "Catch will be downloaded when ${CMAKE_PROJECT_NAME} is built")
