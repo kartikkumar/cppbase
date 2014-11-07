@@ -174,14 +174,6 @@ install(DIRECTORY ${MYINC_PATH}/${CMAKE_PROJECT_NAME}
         FILES_MATCHING PATTERN "*.hpp")
 install(TARGETS ${MYPROJ_LIB} DESTINATION lib)
 
-# Install header files and library. 
-# Destination is set by CMAKE_INSTALL_PREFIX and defaults to usual locations, unless overridden by
-# user.
-install(DIRECTORY ${MYINC_PATH}/${CMAKE_PROJECT_NAME} 
-        DESTINATION include
-        FILES_MATCHING PATTERN "*.hpp")
-#install(TARGETS ${MYPROJ_LIB} DESTINATION lib)
-
 # Set up packager.
 set(CPACK_PACKAGE_DESCRIPTION_SUMMARY "${CMAKE_PROJECT_NAME}")
 set(CPACK_PACKAGE_VENDOR "${CMAKE_PROJECT_NAME}_VENDOR_NAME")
