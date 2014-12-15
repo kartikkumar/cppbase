@@ -23,7 +23,7 @@ addons:
     project:
       name: "kartikkumar/cpp-project"
     notification_email: me@kartikkumar.com
-    build_command_prepend: "mkdir build; cd build; cmake -DCMAKE_BUILD_TYPE=$BUILD_TYPE -DBUILD_TESTS=on -DBUILD_TESTS_WITH_EIGEN=on .."
+    build_command_prepend: "mkdir build; cd build; cmake -DCMAKE_BUILD_TYPE=$BUILD_TYPE -DBUILD_TESTS=on .."
     build_command: "make"
     branch_pattern: coverity_scan
 
@@ -36,7 +36,7 @@ script:
   - if [ "$COVERITY_SCAN_BRANCH_PATTERN" != "coverity_scan" ]; then
       mkdir build;
       cd build;
-      cmake -DCMAKE_BUILD_TYPE=$BUILD_TYPE -DBUILD_TESTS=on -DBUILD_TESTS_WITH_EIGEN=on ..;
+      cmake -DCMAKE_BUILD_TYPE=$BUILD_TYPE -DBUILD_TESTS=on ..;
       make;
       ctest -V;
     fi
