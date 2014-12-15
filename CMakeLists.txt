@@ -97,9 +97,6 @@ endif(CMAKE_COMPILER_IS_GNUCXX)
 
 include_directories(AFTER "${INCLUDE_PATH}")
 
-# Include script to build external library with CMake.
-include(ExternalProject)
-
 include(Dependencies.cmake)
 
 set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${LIB_PATH})
