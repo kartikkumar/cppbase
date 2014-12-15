@@ -33,6 +33,7 @@ set(MAIN_NAME                                  "cpp_project_main")
 set(TEST_PATH                                  "${PROJECT_BINARY_DIR}/test")
 set(TEST_NAME                                  "test_cpp_project")
 
+OPTION(BUILD_MAIN                              "Build main function"            ON)
 OPTION(BUILD_DOCS                              "Build docs"                     OFF)
 OPTION(BUILD_TESTS                             "Build tests"                    OFF)
 OPTION(BUILD_DEPENDENCIES                      "Force build of dependencies"    OFF)
@@ -149,7 +150,8 @@ endif(BUILD_TESTS)
 install(DIRECTORY ${INCLUDE_PATH}/${CMAKE_PROJECT_NAME}
         DESTINATION include
         FILES_MATCHING PATTERN "*.hpp")
-install(TARGETS ${PROJECT_LIB} DESTINATION lib)
+install(TARGETS ${LIB_NAME} DESTINATION lib)
+install(TARGETS ${BIN_NAME} DESTINATION bin)
 
 # Set up packager.
 set(CPACK_PACKAGE_DESCRIPTION_SUMMARY "${CMAKE_PROJECT_NAME}")
