@@ -1,3 +1,7 @@
+# Copyright (c) <year> <author> (<email>)
+# Distributed under the MIT License.
+# See accompanying file LICENSE.md or copy at http://opensource.org/licenses/MIT
+
 language: cpp
 
 compiler:
@@ -27,7 +31,17 @@ addons:
     build_command: "make"
     branch_pattern: coverity_scan
 
+before_install:
+  - sudo chmod ugo+x scripts/update_doxygen.sh
+  - sudo chmod ugo+x scripts/check_doxygen.sh
+  # Fetch a newer CMake.
+  # https://github.com/bjz/glfw-rs/commit/e9353a14afa5c647497837e16fd44d0e1d6eb326
+  - yes | sudo add-apt-repository ppa:kalakris/cmake
+
 install:
+  - sudo apt-get install cmake
+  - sudo apt-get autoremove
+  - sudo ./scripts/update_doxygen.sh
   - if [ "$COVERITY_SCAN_BRANCH_PATTERN" != "coverity_scan" ] && [ "$CXX" == "g++" ] && [ "$BUILD_TYPE" == "Debug" ]; then
       sudo pip install cpp-coveralls;
     fi
@@ -36,8 +50,9 @@ script:
   - if [ "$COVERITY_SCAN_BRANCH_PATTERN" != "coverity_scan" ]; then
       mkdir build;
       cd build;
-      cmake -DCMAKE_BUILD_TYPE=$BUILD_TYPE -DBUILD_TESTS=on ..;
+      cmake -DCMAKE_BUILD_TYPE=$BUILD_TYPE -DBUILD_TESTS=on -DBUILD_DOXYGEN_DOCS=on ..;
       make;
+      ../scripts/check_doxygen.sh;
       ctest -V;
     fi
 

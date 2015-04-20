@@ -23,6 +23,9 @@ set(TEST_SRC_PATH                              "${PROJECT_PATH}/test")
 if(NOT EXTERNAL_PATH)
   set(EXTERNAL_PATH                            "${PROJECT_PATH}/external")
 endif(NOT EXTERNAL_PATH)
+if(NOT DOXYGEN_PATH)
+  set(DOXYGEN_PATH                             "${PROJECT_PATH}/doxydocs")
+endif(NOT DOXYGEN_PATH)
 if(NOT DOCS_PATH)
   set(DOCS_PATH                                "${PROJECT_PATH}/docs")
 endif(NOT DOCS_PATH)
@@ -34,7 +37,7 @@ set(TEST_PATH                                  "${PROJECT_BINARY_DIR}/test")
 set(TEST_NAME                                  "test_cpp_project")
 
 OPTION(BUILD_MAIN                              "Build main function"            ON)
-OPTION(BUILD_DOCS                              "Build docs"                     OFF)
+OPTION(BUILD_DOXYGEN_DOCS                      "Build docs"                     OFF)
 OPTION(BUILD_TESTS                             "Build tests"                    OFF)
 OPTION(BUILD_DEPENDENCIES                      "Force build of dependencies"    OFF)
 
@@ -110,7 +113,7 @@ if(BUILD_MAIN)
   target_link_libraries(${MAIN_NAME} ${LIB_NAME})
 endif(BUILD_MAIN)
 
-if(BUILD_DOCS)
+if(BUILD_DOXYGEN_DOCS)
   find_package(Doxygen)
 
   if(NOT DOXYGEN_FOUND)
@@ -124,10 +127,10 @@ if(BUILD_DOCS)
   # Add a custom target to run Doxygen whenever the project is built.
   # If you do NOT want the documentation to be generated EVERY time you build the project
   # then leave out the 'ALL' keyword from the command below.
-  add_custom_target(docs ALL COMMAND ${DOXYGEN_EXECUTABLE}
+  add_custom_target(doxygen_docs ALL COMMAND ${DOXYGEN_EXECUTABLE}
                     ${PROJECT_BINARY_DIR}/Doxyfile
                     SOURCES ${PROJECT_BINARY_DIR}/Doxyfile)
-endif(BUILD_DOCS)
+endif(BUILD_DOXYGEN_DOCS)
 
 if(BUILD_TESTS)
   enable_testing()

@@ -29,7 +29,7 @@ To install this project, please ensure that you have installed the following (in
   - [Gcov](https://gcc.gnu.org/onlinedocs/gcc/Gcov.html) (optional)
   - [LCOV](http://ltp.sourceforge.net/coverage/lcov.php) (optional)
 
-CppProject does not depend on any libraries. The following library is optional (see `Build options`):
+`CppProject`  does not depend on any libraries. The following library is optional (see `Build options`):
 
   - [CATCH](https://www.github.com/philsquared/Catch) (unit testing library necessary for `BUILD_TESTS` build option)
 
@@ -60,7 +60,7 @@ You can pass the following, general command-line options when running CMake:
   - `-DCMAKE_INSTALL_PREFIX[=$install_dir]`: set path prefix for install script (`make install`); if not set, defaults to usual locations
   - `-DBUILD_SHARED_LIBS=[on|off (default)]`: build shared libraries instead of static
   - `-DBUILD_MAIN[=on|off (default)]`: build the main-function
-  - `-DBUILD_DOCS[=ON|OFF (default)]`: build the [Doxygen](http://www.doxygen.org "Doxygen homepage") documentation ([LaTeX](http://www.latex-project.org/) must be installed with `amsmath` package)
+  - `-DBUILD_DOXYGEN_DOCS[=ON|OFF (default)]`: build the [Doxygen](http://www.doxygen.org "Doxygen homepage") documentation ([LaTeX](http://www.latex-project.org/) must be installed with `amsmath` package)
   - `-DBUILD_TESTS[=ON|OFF (default)]`: build tests (execute tests from build-directory using `ctest -V`)
   - `-DBUILD_DEPENDENCIES[=ON|OFF (default)]`: force local build of dependencies, instead of first searching system-wide using `find_package()`
 
@@ -85,11 +85,3 @@ Disclaimer
 ------
 
 The copyright holders are not liable for any damage(s) incurred due to improper use of `CppProject`.
-
-TODO
-------
-
-  - Find a way to have nested variables in `Doxygen` config file so that e.g., `@@CMAKE_PROJECT_NAME@_VERSION@` works.
-  - Add version detection in `CMake` module so that find_package respects minimum version required.
-  - Find a way to provide an option to clean installation.
-  - Write a script that renames this template project to a custom name for a new project provided by the user (e.g. a shell script).
