@@ -43,6 +43,9 @@ before_install:
   # https://github.com/bjz/glfw-rs/commit/e9353a14afa5c647497837e16fd44d0e1d6eb326
   #- yes | sudo add-apt-repository ppa:kalakris/cmake
 
+script:
+  - ls -R $HOME/cmake
+
 install:
   # - if [ "$COVERITY_SCAN_BRANCH_PATTERN" != "coverity_scan" ] && [ "$CXX" == "g++" ] && [ "$BUILD_TYPE" == "Debug" ]; then
   #     sudo pip install cpp-coveralls;
