@@ -1,4 +1,4 @@
-/*    
+/*
  * Copyright (c) <year> <author> (<email>)
  * Distributed under the MIT License.
  * See accompanying file LICENSE.md or copy at http://opensource.org/licenses/MIT
@@ -14,7 +14,7 @@ namespace cpp_project
 /*!
  * Computes factorial of a given integer.
  * @param  integerNumber Integer number to compute factorial of
- * @return               Value of factorial of integer  
+ * @return               Value of factorial of integer
  */
 const int computeFactorial( const int integerNumber );
 
