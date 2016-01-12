@@ -24,6 +24,10 @@ matrix:
       env: COVERITY_SCAN_BRANCH_PATTERN=coverity_scan BUILD_TYPE=Release
 
 addons:
+addons:
+  apt:
+    packages:
+    - wget
   coverity_scan:
     project:
       name: "kartikkumar/cpp-project"
