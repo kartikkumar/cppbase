@@ -27,7 +27,6 @@ addons:
   apt:
     packages:
     - cmake
-    - doxygen
   coverity_scan:
     project:
       name: "kartikkumar/cpp-project"
@@ -37,6 +36,7 @@ addons:
     branch_pattern: coverity_scan
 
 before_install:
+  - bash scripts/install_doxygen.sh
   # Fetch a newer CMake.
   # https://github.com/bjz/glfw-rs/commit/e9353a14afa5c647497837e16fd44d0e1d6eb326
   #- yes | sudo add-apt-repository ppa:kalakris/cmake
