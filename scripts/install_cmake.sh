@@ -6,7 +6,7 @@
 set -ev
 
 # Fetch and build updated version of CMake from source.
-wget https://cmake.org/files/v3.4/cmake-3.4.1.tar.gz
+wget https://cmake.org/files/v3.4/cmake-3.4.1.tar.gz --no-check-certificate
 tar -xzvf cmake-3.4.1.tar.gz
 cd cmake-3.4.1
 ./bootstrap
