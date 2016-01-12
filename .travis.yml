@@ -27,6 +27,7 @@ addons:
   apt:
     packages:
     - cmake
+    - doxygen
   coverity_scan:
     project:
       name: "kartikkumar/cpp-project"
