@@ -1,7 +1,7 @@
 CppProject
 ===
 
-\cond [![MIT license](http://img.shields.io/badge/license-MIT-brightgreen.svg)](http://opensource.org/licenses/MIT) [![Build Status](https://travis-ci.org/kartikkumar/cpp-project.svg?branch=master)](https://travis-ci.org/kartikkumar/cpp-project)[![Coverity Scan Build Status](https://scan.coverity.com/projects/3686/badge.svg)](https://scan.coverity.com/projects/3686) [![Coverage Status](https://coveralls.io/repos/kartikkumar/cpp-project/badge.png)](https://coveralls.io/r/kartikkumar/cpp-project) \endcond
+\cond [![MIT license](http://img.shields.io/badge/license-MIT-brightgreen.svg)](http://opensource.org/licenses/MIT) [![Build Status](https://travis-ci.org/kartikkumar/cpp-project.svg?branch=master)](https://travis-ci.org/kartikkumar/cpp-project)[![Coverity Scan Build Status](https://scan.coverity.com/projects/3686/badge.svg)](https://scan.coverity.com/projects/3686) [![Coverage Status](https://coveralls.io/repos/kartikkumar/cpp-project/badge.svg?branch=master&service=github)](https://coveralls.io/github/kartikkumar/cpp-project?branch=master) \endcond
 
 `CppProject` is a template for a simple CMake-based C++ project. It can be used as the basis for new projects: remember to change all instances of `CppProject` to your new project name. An example CMake module is available to make it easy to include your project in other CMake-based projects (should be customized): [FindCppProject.cmake](https://github.com/kartikkumar/cmake-modules/Modules/FindCppProject.cmake).
 
