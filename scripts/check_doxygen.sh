@@ -6,7 +6,6 @@
 set -ev
 
 # Count the number of warnings when building Doxygen output.
-cd build
 warnings=$(make doxygen_docs 2>&1 >/dev/null | wc -l)
 if [[ $warnings -ne 0 ]]; then
   # Print the output.

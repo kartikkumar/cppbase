@@ -53,14 +53,8 @@ script:
       cd build;
       $HOME/cmake/bin/cmake -DPROJECT_NAME=cpp_project -DCMAKE_BUILD_TYPE=$BUILD_TYPE -DBUILD_TESTS=on -DDOXYGEN_EXECUTABLE=$HOME/doxygen/bin/doxygen -DBUILD_DOXYGEN_DOCS=on ..;
       make;
+      ../scripts/check_doxygen.sh
       ctest -V;
-      warnings=$(make doxygen_docs 2>&1 >/dev/null | wc -l)
-      if [[ $warnings -ne 0 ]]; then
-        # Print the output.
-        make doxygen_docs
-        echo "Found Doxygen warnings"
-        exit 1
-      fi;
     fi
 
 after_success:
