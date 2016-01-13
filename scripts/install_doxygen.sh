@@ -6,11 +6,6 @@
 set -ev
 
 # Fetch and build updated version of Doxygen from source.
-# Check to see if CMake folder is empty.
-if [ ! -d "$HOME/doxygen" ]; then
-    wget http://ftp.stack.nl/pub/users/dimitri/doxygen-1.8.11.linux.bin.tar.gz
-    tar -xzvf doxygen-1.8.11.linux.bin.tar.gz
-    mv doxygen-1.8.11 $HOME/doxygen
-else
-  echo "Using cached Doxygen directory."
-fi
+wget http://ftp.stack.nl/pub/users/dimitri/doxygen-1.8.11.linux.bin.tar.gz
+tar -xzvf doxygen-1.8.11.linux.bin.tar.gz
+mv doxygen-1.8.11 $HOME/doxygen
