@@ -54,7 +54,7 @@ script:
       $HOME/cmake/bin/cmake -DPROJECT_NAME=cpp_project -DCMAKE_BUILD_TYPE=$BUILD_TYPE -DBUILD_TESTS=on -DDOXYGEN_EXECUTABLE=$HOME/doxygen/bin/doxygen -DBUILD_DOXYGEN_DOCS=on ..;
       make;
       ctest -V;
-      ../scripts/check_doxygen.sh
+      ../scripts/check_doxygen.sh;
     fi
 
 after_success:
