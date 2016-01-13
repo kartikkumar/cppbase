@@ -4,11 +4,19 @@
 
 cmake_minimum_required(VERSION 2.6)
 
+# Check if project name has been specified correctly.
+if((NOT PROJECT_NAME))
+  message(FATAL_ERROR "Project name must be specified!")
+endif ((NOT PROJECT_NAME))
+if(${PROJECT_NAME} MATCHES " ")
+    message(FATAL_ERROR "Project name cannot contain spaces!")
+endif(${PROJECT_NAME} MATCHES " ")
+
 # Change this section to correspond with your project info.
-project(CppProject C CXX)
-set(PROJECT_SUMMARY                            "<project description>")
-set(${CMAKE_PROJECT_NAME}_VENDOR_NAME          "<author>")
-set(${CMAKE_PROJECT_NAME}_VENDOR_CONTACT       "<email>")
+project(${PROJECT_NAME} C CXX)
+set(${CMAKE_PROJECT_NAME}_SUMMARY              "${PROJECT_SUMMARY}")
+set(${CMAKE_PROJECT_NAME}_VENDOR_NAME          "${PROJECT_VENDOR_NAME}")
+set(${CMAKE_PROJECT_NAME}_VENDOR_CONTACT       "${PROJECT_VENDOR_CONTACT}")
 set(${CMAKE_PROJECT_NAME}_VERSION_MAJOR        0)
 set(${CMAKE_PROJECT_NAME}_VERSION_MINOR        0)
 set(${CMAKE_PROJECT_NAME}_VERSION_PATCH        0)
@@ -30,11 +38,11 @@ if(NOT DOCS_PATH)
   set(DOCS_PATH                                "${PROJECT_PATH}/docs")
 endif(NOT DOCS_PATH)
 set(LIB_PATH                                   "${PROJECT_BINARY_DIR}/lib")
-set(LIB_NAME                                   "cpp_project")
+set(LIB_NAME                                   "${PROJECT_NAME}")
 set(BIN_PATH                                   "${PROJECT_BINARY_DIR}/bin")
-set(MAIN_NAME                                  "cpp_project_main")
+set(MAIN_NAME                                  "${PROJECT_NAME}_main")
 set(TEST_PATH                                  "${PROJECT_BINARY_DIR}/test")
-set(TEST_NAME                                  "test_cpp_project")
+set(TEST_NAME                                  "test_${PROJECT_NAME}")
 
 OPTION(BUILD_MAIN                              "Build main function"            ON)
 OPTION(BUILD_DOXYGEN_DOCS                      "Build docs"                     OFF)
@@ -45,18 +53,8 @@ include(CMakeDependentOption)
 CMAKE_DEPENDENT_OPTION(BUILD_COVERAGE_ANALYSIS "Build code coverage analysis"   OFF
                                                "BUILD_TESTS"                    OFF)
 
-set(SRC
-  "${SRC_PATH}/factorial.cpp"
-)
 
-set(MAIN_SRC
-  "${SRC_PATH}/main.cpp"
-)
-
-set(TEST_SRC
-  "${TEST_SRC_PATH}/testCppProject.cpp"
-  "${TEST_SRC_PATH}/testFactorial.cpp"
-)
+include(ProjectFiles.cmake)
 
 # Set CMake build-type. If it not supplied by the user, the default built type is "Release".
 if(((NOT CMAKE_BUILD_TYPE)

@@ -1,9 +1,10 @@
 CppProject
 ===
 
-[![MIT license](http://img.shields.io/badge/license-MIT-brightgreen.svg)](http://opensource.org/licenses/MIT) [![Build Status](https://travis-ci.org/kartikkumar/cpp-project.svg?branch=master)](https://travis-ci.org/kartikkumar/cpp-project)[![Coverity Scan Build Status](https://scan.coverity.com/projects/3686/badge.svg)](https://scan.coverity.com/projects/3686) [![Coverage Status](https://coveralls.io/repos/kartikkumar/cpp-project/badge.png)](https://coveralls.io/r/kartikkumar/cpp-project)
+\cond [![MIT license](http://img.shields.io/badge/license-MIT-brightgreen.svg)](http://opensource.org/licenses/MIT) [![Build Status](https://travis-ci.org/kartikkumar/cpp-project.svg?branch=master)](https://travis-ci.org/kartikkumar/cpp-project)[![Coverity Scan Build Status](https://scan.coverity.com/projects/3686/badge.svg)](https://scan.coverity.com/projects/3686) [![Coverage Status](https://coveralls.io/repos/kartikkumar/cpp-project/badge.png)](https://coveralls.io/r/kartikkumar/cpp-project) \endcond
 
 `CppProject` is a template for a simple CMake-based C++ project. It can be used as the basis for new projects: remember to change all instances of `CppProject` to your new project name. An example CMake module is available to make it easy to include your project in other CMake-based projects (should be customized): [FindCppProject.cmake](https://github.com/kartikkumar/cmake-modules/Modules/FindCppProject.cmake).
+
 Features
 ------
 
@@ -16,6 +17,7 @@ Features
   - Continuous Integration ([Travis CI](https://travis-ci.org/ "Travis CI homepage"))
   - Code coverage analysis ([Coveralls](https://coveralls.io "Coveralls.io homepage")) (`make coverage`)
   - Example of how to include external dependencies (using `ExternalProject` module)
+  - Separate file to specific location of project files (`ProjectFiles.cmake`)
 
 Requirements
 ------
@@ -38,13 +40,13 @@ This dependency will be downloaded and configured automagically if not already p
 Installation
 ------
 
-Run the following commands to download, build, and install this project.
+Run the following commands to download, build, and install this project. Substitute "project_name" with the name of your project (if you leave it out, the repository will be cloned to a local folder called "cpp-project"). This will customize the project targets for you. Note that "project_name" must not contain spaces!
 
-    git clone https://www.github.com/kartikkumar/cpp-project
-    cd cpp-project
+    git clone https://www.github.com/kartikkumar/cpp-project <project_name>
+    cd <project_name>
     git submodule init && git submodule update
     mkdir build && cd build
-    cmake .. && cmake --build .
+    cmake -DPROJECT_NAME=<project_name> .. && cmake --build .
 
 To install the header files, run the following from within the `build` directory:
 
@@ -52,14 +54,19 @@ To install the header files, run the following from within the `build` directory
 
 Note that dependencies are installed by fetching them online, in case they cannot be detected on your local system. If the build process fails, check the error log given. Typically, building fails due to timeout. Simply run the `cmake --build .` command once more.
 
+Project files can be specified in `ProjectFiles.cmake`.
+
 Build options
 -------------
 
 You can pass the following, general command-line options when running CMake:
 
+  - `-DPROJECT_SUMMARY`: set short string summary for your project
+  - `-DPROJECT_VENDOR_NAME`: set short string name for vendor of your project
+  - `-DPROJECT_VENDOR_CONTACT`: set short string email address for vendor of your project
   - `-DCMAKE_INSTALL_PREFIX[=$install_dir]`: set path prefix for install script (`make install`); if not set, defaults to usual locations
-  - `-DBUILD_SHARED_LIBS=[on|off (default)]`: build shared libraries instead of static
-  - `-DBUILD_MAIN[=on|off (default)]`: build the main-function
+  - `-DBUILD_SHARED_LIBS=[ON|OFF (default)]`: build shared libraries instead of static
+  - `-DBUILD_MAIN[=ON|OFF (default)]`: build the main-function
   - `-DBUILD_DOXYGEN_DOCS[=ON|OFF (default)]`: build the [Doxygen](http://www.doxygen.org "Doxygen homepage") documentation ([LaTeX](http://www.latex-project.org/) must be installed with `amsmath` package)
   - `-DBUILD_TESTS[=ON|OFF (default)]`: build tests (execute tests from build-directory using `ctest -V`)
   - `-DBUILD_DEPENDENCIES[=ON|OFF (default)]`: force local build of dependencies, instead of first searching system-wide using `find_package()`

@@ -36,9 +36,6 @@ addons:
 before_install:
   - bash scripts/install_cmake.sh
   - bash scripts/install_doxygen.sh
-  # Fetch a newer CMake.
-  # https://github.com/bjz/glfw-rs/commit/e9353a14afa5c647497837e16fd44d0e1d6eb326
-  #- yes | sudo add-apt-repository ppa:kalakris/cmake
 
 before_script::
   - ls -R $HOME/cmake
@@ -55,6 +52,7 @@ script:
       cd build;
       $HOME/cmake/bin/cmake -DCMAKE_BUILD_TYPE=$BUILD_TYPE -DBUILD_TESTS=on -DDOXYGEN_EXECUTABLE=$HOME/doxygen/bin/doxygen -DBUILD_DOXYGEN_DOCS=on ..;
       make;
+      ../scripts/check_doxygen.sh
       ctest -V;
     fi
 
