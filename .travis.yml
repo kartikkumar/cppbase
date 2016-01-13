@@ -38,6 +38,7 @@ before_install:
   - bash scripts/install_doxygen.sh
 
 before_script::
+  - chmod ugo+x scripts/check_doxygen.sh
   - ls -R $HOME/cmake
   - ls -R $HOME/doxygen
 
@@ -52,11 +53,11 @@ script:
       cd build;
       $HOME/cmake/bin/cmake -DPROJECT_NAME=cpp_project -DCMAKE_BUILD_TYPE=$BUILD_TYPE -DBUILD_TESTS=on -DDOXYGEN_EXECUTABLE=$HOME/doxygen/bin/doxygen -DBUILD_DOXYGEN_DOCS=on ..;
       make;
+      ./scripts/check_doxygen.sh
       ctest -V;
     fi
 
 after_success:
-  - bash scripts/check_doxygen.sh
   # - if [ "$COVERITY_SCAN_BRANCH_PATTERN" != "coverity_scan" ] && [ "$CXX" == "g++" ] && [ "$BUILD_TYPE" == "Debug" ]; then
   #     coveralls --root .. -E ".*external.*" -E ".*CMakeFiles.*" -E ".*test/.*.cpp.*";
   #   fi
