@@ -37,15 +37,13 @@ before_install:
   - bash scripts/install_cmake.sh
   - bash scripts/install_doxygen.sh
   - chmod ugo+x scripts/check_doxygen.sh
+  - if [ "$COVERITY_SCAN_BRANCH_PATTERN" != "coverity_scan" ] && [ "$CXX" == "g++" ] && [ "$BUILD_TYPE" == "Debug" ]; then
+      pip install --user cpp-coveralls;
+    fi
 
 before_script::
   - ls -R $HOME/cmake
   - ls -R $HOME/doxygen
-
-install:
-  - if [ "$COVERITY_SCAN_BRANCH_PATTERN" != "coverity_scan" ] && [ "$CXX" == "g++" ] && [ "$BUILD_TYPE" == "Debug" ]; then
-      pip install cpp-coveralls;
-    fi
 
 script:
   - if [ "$COVERITY_SCAN_BRANCH_PATTERN" != "coverity_scan" ]; then
