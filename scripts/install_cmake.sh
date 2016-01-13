@@ -6,9 +6,14 @@
 set -ev
 
 # Fetch and build updated version of CMake from source.
-wget https://cmake.org/files/v3.4/cmake-3.4.1.tar.gz --no-check-certificate
-tar -xzvf cmake-3.4.1.tar.gz
-cd cmake-3.4.1
-./bootstrap --prefix=$HOME/cmake
-make
-make install
+# Check to see if CMake folder is empty.
+if [ ! -d "$HOME/cmake" ]; then
+    wget https://cmake.org/files/v3.4/cmake-3.4.1.tar.gz --no-check-certificate
+    tar -xzvf cmake-3.4.1.tar.gz
+    cd cmake-3.4.1
+    ./bootstrap --prefix=$HOME/cmake
+    make
+    make install
+else
+  echo "Using cached CMake directory."
+fi

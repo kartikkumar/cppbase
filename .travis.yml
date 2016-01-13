@@ -2,8 +2,14 @@
 # Distributed under the MIT License.
 # See accompanying file LICENSE.md or copy at http://opensource.org/licenses/MIT
 
-sudo: false
 language: cpp
+
+cache:
+  directories:
+  - $HOME/cmake
+  - $HOME/doxygen
+
+sudo: false
 
 compiler:
   - gcc
@@ -24,10 +30,6 @@ matrix:
       env: COVERITY_SCAN_BRANCH_PATTERN=coverity_scan BUILD_TYPE=Release
 
 addons:
-addons:
-  apt:
-    packages:
-    - wget
   coverity_scan:
     project:
       name: "kartikkumar/cpp-project"
@@ -43,8 +45,9 @@ before_install:
   # https://github.com/bjz/glfw-rs/commit/e9353a14afa5c647497837e16fd44d0e1d6eb326
   #- yes | sudo add-apt-repository ppa:kalakris/cmake
 
-script:
+before_script::
   - ls -R $HOME/cmake
+  - ls -R $HOME/doxygen
 
 install:
   # - if [ "$COVERITY_SCAN_BRANCH_PATTERN" != "coverity_scan" ] && [ "$CXX" == "g++" ] && [ "$BUILD_TYPE" == "Debug" ]; then
@@ -55,7 +58,7 @@ script:
   - if [ "$COVERITY_SCAN_BRANCH_PATTERN" != "coverity_scan" ]; then
       mkdir build;
       cd build;
-      cmake -DCMAKE_BUILD_TYPE=$BUILD_TYPE -DBUILD_TESTS=on -DBUILD_DOXYGEN_DOCS=on ..;
+      $HOME/CMake/bin/cmake -DCMAKE_BUILD_TYPE=$BUILD_TYPE -DBUILD_TESTS=on -DBUILD_DOXYGEN_DOCS=on ..;
       make;
       ctest -V;
     fi
