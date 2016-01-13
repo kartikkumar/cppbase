@@ -36,9 +36,9 @@ addons:
 before_install:
   - bash scripts/install_cmake.sh
   - bash scripts/install_doxygen.sh
+  - chmod ugo+x scripts/check_doxygen.sh
 
 before_script::
-  - chmod ugo+x scripts/check_doxygen.sh
   - ls -R $HOME/cmake
   - ls -R $HOME/doxygen
 
