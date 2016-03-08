@@ -1,4 +1,4 @@
-/*    
+/*
  * Copyright (c) <year> <author> (<email>)
  * Distributed under the MIT License.
  * See accompanying file LICENSE.md or copy at http://opensource.org/licenses/MIT
@@ -30,7 +30,7 @@ int main( const int numberOfInputs, const char* inputArguments[ ] )
 	catch( std::exception& error )
 	{
 		std::cout << error.what( ) << std::endl;
-	}	
+	}
 
 	return EXIT_SUCCESS;
 }
