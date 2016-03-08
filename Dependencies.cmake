@@ -15,7 +15,7 @@ if(BUILD_TESTS)
     ExternalProject_Add(catch
       PREFIX ${EXTERNAL_PATH}/Catch
       #--Download step--------------
-      URL https://github.com/kartikkumar/Catch/archive/master.zip
+      URL https://github.com/philsquared/Catch/archive/master.zip
       TIMEOUT 30
       #--Update/Patch step----------
       UPDATE_COMMAND ""

@@ -53,7 +53,6 @@ include(CMakeDependentOption)
 CMAKE_DEPENDENT_OPTION(BUILD_COVERAGE_ANALYSIS "Build code coverage analysis"   OFF
                                                "BUILD_TESTS"                    OFF)
 
-
 include(ProjectFiles.cmake)
 
 # Set CMake build-type. If it not supplied by the user, the default built type is "Release".
