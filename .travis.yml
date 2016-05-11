@@ -12,7 +12,7 @@ compiler:
 
 env:
   global:
-    - secure: "ttqyPdFYLhW4HBjKZi9qSNlYp4cCerztorW4n86+BPTXWCNGtJBpes/AWJP0Q4xD3HhGssw2TVeV2LmUcxJCGSEKSPVZn4cElgPwbCBuyC5LBBySykN8Gn8qzaSkMN3KPO9nsUsXKHwpqYb+B5QtKusnrgM1p99gbku3xocc2FE="
+    - secure: "aMh+niXXk2m2YvuHC/xVo67wm9hw1+/yUnoqBxPmK5hVzWTefSjYM+sNCZBxybskFg04aBcNt6BycAeyp4+nhiYbw2x45Sxp60Qk6u1h9m4+dvisxCZuftOt8ZbGxCKxXtbANqOg9b7b0b6986506SPD8d7kXG+Q99tN9kf71fE="
   matrix:
     - BUILD_TYPE=Debug
     - BUILD_TYPE=Release
@@ -27,9 +27,10 @@ matrix:
 addons:
   coverity_scan:
     project:
-      name: "kartikkumar/cpp-project"
+      name: "kartikkumar/cppbase"
+      description: "Build submitted via Travis CI"
     notification_email: me@kartikkumar.com
-    build_command_prepend: "mkdir build; cd build; cmake -DPROJECT_NAME=cpp_project -DCMAKE_BUILD_TYPE=$BUILD_TYPE -DBUILD_TESTS=on .."
+    build_command_prepend: "mkdir build; cd build; cmake -DPROJECT_NAME=cppbase -DCMAKE_BUILD_TYPE=$BUILD_TYPE -DBUILD_TESTS=on .."
     build_command: "make"
     branch_pattern: coverity_scan
 
@@ -49,7 +50,7 @@ script:
   - if [ "$COVERITY_SCAN_BRANCH_PATTERN" != "coverity_scan" ]; then
       mkdir build;
       cd build;
-      $HOME/cmake/bin/cmake -DPROJECT_NAME=cpp_project -DCMAKE_BUILD_TYPE=$BUILD_TYPE -DBUILD_TESTS=on -DDOXYGEN_EXECUTABLE=$HOME/doxygen/bin/doxygen -DBUILD_DOXYGEN_DOCS=on ..;
+      $HOME/cmake/bin/cmake -DPROJECT_NAME=cppbase -DCMAKE_BUILD_TYPE=$BUILD_TYPE -DBUILD_TESTS=on -DDOXYGEN_EXECUTABLE=$HOME/doxygen/bin/doxygen -DBUILD_DOXYGEN_DOCS=on ..;
       make;
       ctest -V;
       ../scripts/check_doxygen.sh;

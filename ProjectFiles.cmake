@@ -14,6 +14,6 @@ set(MAIN_SRC
 
 # Set project test source files.
 set(TEST_SRC
-  "${TEST_SRC_PATH}/testCppProject.cpp"
+  "${TEST_SRC_PATH}/testCppbase.cpp"
   "${TEST_SRC_PATH}/testFactorial.cpp"
 )

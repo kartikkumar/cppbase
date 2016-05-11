@@ -1,15 +1,17 @@
-CppProject
+cppbase
 ===
 
-\cond [![MIT license](http://img.shields.io/badge/license-MIT-brightgreen.svg)](http://opensource.org/licenses/MIT) [![Build Status](https://travis-ci.org/kartikkumar/cpp-project.svg?branch=master)](https://travis-ci.org/kartikkumar/cpp-project)[![Coverity Scan Build Status](https://scan.coverity.com/projects/3686/badge.svg)](https://scan.coverity.com/projects/3686) [![Coverage Status](https://coveralls.io/repos/kartikkumar/cpp-project/badge.svg?branch=master&service=github)](https://coveralls.io/github/kartikkumar/cpp-project?branch=master) \endcond
+\cond [![MIT license](http://img.shields.io/badge/license-MIT-brightgreen.svg)](http://opensource.org/licenses/MIT) [![Build Status](https://travis-ci.org/kartikkumar/cppbase.svg?branch=master)](https://travis-ci.org/kartikkumar/cppbase)[![Coverity Scan Build Status](https://scan.coverity.com/projects/3686/badge.svg)](https://scan.coverity.com/projects/3686) [![Coverage Status](https://coveralls.io/repos/kartikkumar/cppbase/badge.svg?branch=master&service=github)](https://coveralls.io/github/kartikkumar/cppbase?branch=master) \endcond
 
-CppProject is a template for a simple CMake-based C++ project. It can be used as the basis for new projects: remember to change all instances of CppProject to your new project name. An example CMake module is available to make it easy to include your project in other CMake-based projects (should be customized): [FindCppProject.cmake](https://github.com/kartikkumar/cmake-modules/Modules/FindCppProject.cmake).
+`cppbase` is a template for a simple CMake-based C++ project: it can be used as the basis for new projects. An example CMake module is available to make it easy to include your project in other projects (should be customized): [Findcppbase.cmake](https://github.com/kartikkumar/cmake-modules/Modules/Findcppbase.cmake).
+
+(**N.B. remember to change all instances of `cppbase` to your new project name!**).
 
 Features
 ------
 
   - General directory structure common to C++ projects
-  - Example of CMake module (`cmake/Modules/FindCppProject.cmake`)
+  - Example of CMake module [Findcppbase.cmake](https://github.com/kartikkumar/cmake-modules/Modules/Findcppbase.cmake)
   - Testing framework ([Catch](https://www.github.com/philsquared/Catch "Catch Github repository"))
   - Install script (`make install`)
   - CPack script for packaging (`make package`)
@@ -31,7 +33,7 @@ To install this project, please ensure that you have installed the following (in
   - [Gcov](https://gcc.gnu.org/onlinedocs/gcc/Gcov.html) (optional)
   - [LCOV](http://ltp.sourceforge.net/coverage/lcov.php) (optional)
 
-CppProject  does not depend on any libraries. The following library is optional (see `Build options`):
+The following dependency is optional (see `Build options`):
 
   - [CATCH](https://www.github.com/philsquared/Catch) (unit testing library necessary for `BUILD_TESTS` build option)
 
@@ -40,9 +42,9 @@ This dependency will be downloaded and configured automagically if not already p
 Installation
 ------
 
-Run the following commands to download, build, and install this project. Substitute `project_name` with the name of your project (if you leave it out, the repository will be cloned to a local folder called `cpp-project`). This will customize the project targets for you. Note that `project_name` must not contain spaces! The ` --depth 1` parameter passed to `git clone` ensures that the git history is not downloaded. In case you would like to preserve the history of this project, omit that option.
+Run the following commands to download, build, and install this project. Substitute `project_name` with the name of your project (if you leave it out, the repository will be cloned to a local folder called `cppbase`). This will customize the project targets for you. Note that `project_name` must not contain spaces! The ` --depth 1` parameter passed to `git clone` ensures that the git history is not downloaded. In case you would like to preserve the history of this project, omit that option.
 
-    git clone https://www.github.com/kartikkumar/cpp-project --depth 1 <project_name>
+    git clone https://www.github.com/kartikkumar/cppbase --depth 1 <project_name>
     cd <project_name>
     git submodule init && git submodule update
     mkdir build && cd build
@@ -80,13 +82,13 @@ Project structure
 
 This project has been set up with a specific file/folder structure in mind. The following describes some important features of this setup:
 
-  - `cmake/Modules` : Contains `CMake` modules, including `FindCppProject.cmake` template for project-specific module
+  - `cmake/Modules` : Contains `CMake` modules
   - `docs`: Contains project-specific docs in [Markdown](https://help.github.com/articles/github-flavored-markdown/ "GitHub Flavored Markdown") that are also parsed by [Doxygen](http://www.doxygen.org "Doxygen homepage"). This sub-directory includes `global_todo.md`, which contains a global list of TODO items for project that appear on TODO list generated in [Doxygen](http://www.doxygen.org "Doxygen homepage") documentation
   - `doxydocs`: HTML output generated by building [Doxygen](http://www.doxygen.org "Doxygen homepage") documentation
-  - `include/CppProject`: Project header files (*.hpp)
+  - `include`: Project header files (*.hpp)
   - `scripts`: Shell scripts used in [Travis CI](https://travis-ci.org/ "Travis CI homepage") build
   - `src`: Project source files (*.cpp), including `main.cpp`, which contains example main-function for project build
-  - `test`: Project test source files (*.cpp), including `testCppProject.cpp`, which contains include for [Catch](https://www.github.com/philsquared/Catch "Catch Github repository")
+  - `test`: Project test source files (*.cpp) that are provided to the [Catch](https://www.github.com/philsquared/Catch "Catch Github repository") framework
   - `.travis.yml`: Configuration file for [Travis CI](https://travis-ci.org/ "Travis CI homepage") build, including static analysis using [Coverity Scan](https://scan.coverity.com/ "Coverity Scan homepage") and code coverage using [Coveralls](https://coveralls.io "Coveralls.io homepage")
   - `CMakeLists.txt`: main `CMakelists.txt` file for project (should not need to be modified for basic build)
   - `Dependencies.cmake`: list of dependencies and automated build, triggered if dependency cannot be found locally
@@ -100,7 +102,7 @@ Contributing
 
 Once you've made your great commits:
 
-  1. [Fork](https://github.com/kartikkumar/cpp-project/fork) CppProject
+  1. [Fork](https://github.com/kartikkumar/cppbase/fork) cppbase
   2. Create a topic branch - `git checkout -b my_branch`
   3. Push to your branch - `git push origin my_branch`
   4. Create a [Pull Request](http://help.github.com/pull-requests/) from your branch
@@ -109,4 +111,4 @@ Once you've made your great commits:
 Disclaimer
 ------
 
-The copyright holders are not liable for any damage(s) incurred due to improper use of CppProject.
+The copyright holders are not liable for any damage(s) incurred due to improper use of cppbase.
