@@ -13,6 +13,7 @@ if(BUILD_TESTS)
   if(NOT BUILD_DEPENDENCIES)
     find_package(CATCH)
   endif(NOT BUILD_DEPENDENCIES)
+
   if(NOT CATCH_FOUND)
     message(STATUS "Catch will be downloaded when ${CMAKE_PROJECT_NAME} is built")
     ExternalProject_Add(catch-lib
