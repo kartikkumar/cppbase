@@ -50,6 +50,12 @@ Run the following commands to download, build, and install this project. Substit
     mkdir build && cd build
     cmake -DPROJECT_NAME=<project_name> .. && cmake --build .
 
+To push this project to your own remote repository, you can run the following command, which will overcome the issues with utilizing a shallow clone:
+
+    git commit --amend .
+
+This rewrites the last commit and ensures that you can then push the repository to a remote (e.g., Github, BitBucket, Gitlab, etc.).
+
 To install the header files, run the following from within the `build` directory:
 
     make install
