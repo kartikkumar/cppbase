@@ -81,7 +81,11 @@ The following command is conditional and can only be set if `BUILD_TESTS = ON`:
 
  - `-DBUILD_COVERAGE_ANALYSIS[=ON|OFF (default)]`: build code coverage using [Gcov](https://gcc.gnu.org/onlinedocs/gcc/Gcov.html) and [LCOV](http://ltp.sourceforge.net/coverage/lcov.php) (both must be installed; requires [GCC](https://gcc.gnu.org/) compiler; execute coverage analysis from build-directory using `make coverage`)
 
-Pass these options either directly to the `cmake ..` build command or run `ccmake ..` instead to bring up the interface that can be used to toggle options.
+Pass these options either directly to the `cmake ..` command, e.g., to build the tests:
+
+    cmake -DPROJECT_NAME=<project_name> -DBUILD_TESTS=on ..
+
+N.B.: Toggling options to build tests using `ccmake` does not work correctly, as the necessarily libraries are not download automagically!
 
 Project structure
 -------------
@@ -117,4 +121,4 @@ Once you've made your great commits:
 Disclaimer
 ------
 
-The copyright holders are not liable for any damage(s) incurred due to improper use of cppbase.
+The copyright holders are not liable for any damage(s) incurred due to improper use of `cppbase`.

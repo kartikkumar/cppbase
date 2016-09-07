@@ -53,8 +53,6 @@ include(CMakeDependentOption)
 CMAKE_DEPENDENT_OPTION(BUILD_COVERAGE_ANALYSIS "Build code coverage analysis"   OFF
                                                "BUILD_TESTS"                    OFF)
 
-include(ProjectFiles.cmake)
-
 # Set CMake build-type. If it not supplied by the user, the default built type is "Release".
 if(((NOT CMAKE_BUILD_TYPE)
   AND (NOT BUILD_COVERAGE_ANALYSIS))
@@ -96,9 +94,9 @@ if(CMAKE_COMPILER_IS_GNUCXX)
     set(CMAKE_CXX_FLAGS         "${CMAKE_CXX_FLAGS} -fprofile-arcs -ftest-coverage")
 endif(CMAKE_COMPILER_IS_GNUCXX)
 
-include_directories(AFTER "${INCLUDE_PATH}")
-
 include(Dependencies.cmake)
+include(ProjectFiles.cmake)
+include_directories(AFTER "${INCLUDE_PATH}")
 
 set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${LIB_PATH})
 set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${LIB_PATH})
@@ -134,6 +132,9 @@ if(BUILD_TESTS)
   set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${TEST_PATH})
 
   add_executable(${TEST_NAME} ${TEST_SRC})
+  if(NOT CATCH_FOUND)
+    add_dependencies(${TEST_NAME} catch-lib)
+  endif(NOT CATCH_FOUND)
   target_link_libraries(${TEST_NAME} ${LIB_NAME})
   add_test(NAME ${TEST_NAME} COMMAND "${TEST_PATH}/${TEST_NAME}")
 
