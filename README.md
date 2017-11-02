@@ -85,7 +85,7 @@ Pass these options either directly to the `cmake ..` command, e.g., to build the
 
     cmake -DPROJECT_NAME=<project_name> -DBUILD_TESTS=on ..
 
-N.B.: Toggling options to build tests using `ccmake` does not work correctly, as the necessarily libraries are not download automagically!
+N.B.: Toggling options to build tests using `ccmake` does not work correctly, as the necessarily libraries are not downloaded automagically!
 
 Project structure
 -------------
