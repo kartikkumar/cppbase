@@ -11,7 +11,7 @@ Features
 ------
 
   - General directory structure common to C++ projects
-  - Example of CMake module [Findcppbase.cmake](https://github.com/kartikkumar/cmake-modules/Modules/Findcppbase.cmake)
+  - Example of CMake module [Findcppbase.cmake](https://github.com/openastro/cmake-modules/blob/master/Modules/Findcppbase.cmake)
   - Testing framework ([Catch](https://www.github.com/philsquared/Catch "Catch Github repository"))
   - Install script (`make install`)
   - CPack script for packaging (`make package`)
