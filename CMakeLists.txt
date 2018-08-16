@@ -2,7 +2,7 @@
 # Distributed under the MIT License.
 # See accompanying file LICENSE.md or copy at http://opensource.org/licenses/MIT
 
-cmake_minimum_required(VERSION 2.6
+cmake_minimum_required(VERSION 2.6)
 set(CMAKE_CXX_STANDARD 11)
 
 # Check if project name has been specified correctly.
