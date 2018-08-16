@@ -25,5 +25,4 @@ const int computeFactorial( const int integerNumber )
 	return ( integerNumber == 0 ) ? 1 : integerNumber * computeFactorial( integerNumber  - 1 );
 }
 
-
 } // namespace cppbase

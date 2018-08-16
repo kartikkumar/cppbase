@@ -14,8 +14,8 @@ namespace cppbase
 /*!
  * Computes factorial of a given integer.
  *
- * @param  integerNumber Integer number to compute factorial of
- * @return               Value of factorial of integer
+ * @param[in]  integerNumber Integer number to compute factorial of
+ * @return                   Value of factorial of integer
  */
 const int computeFactorial( const int integerNumber );
 

@@ -7,19 +7,19 @@ include(ExternalProject)
 
 # -------------------------------
 
-# Catch: https://github.com/philsquared/Catch
+# Catch2: https://github.com/catchorg/Catch2
 
 if(BUILD_TESTS)
   if(NOT BUILD_DEPENDENCIES)
-    find_package(CATCH)
+    find_package(Catch2)
   endif(NOT BUILD_DEPENDENCIES)
 
-  if(NOT CATCH_FOUND)
-    message(STATUS "Catch will be downloaded when ${CMAKE_PROJECT_NAME} is built")
-    ExternalProject_Add(catch-lib
-      PREFIX ${EXTERNAL_PATH}/Catch
+  if(NOT CATCH2_FOUND)
+    message(STATUS "Catch2 will be downloaded when ${CMAKE_PROJECT_NAME} is built")
+    ExternalProject_Add(catch2-lib
+      PREFIX ${EXTERNAL_PATH}/Catch2
       #--Download step--------------
-      URL https://github.com/philsquared/Catch/archive/master.zip
+      URL https://github.com/catchorg/Catch2/archive/master.zip
       TIMEOUT 30
       #--Update/Patch step----------
       UPDATE_COMMAND ""
@@ -33,14 +33,14 @@ if(BUILD_TESTS)
       #--Output logging-------------
       LOG_DOWNLOAD ON
     )
-    ExternalProject_Get_Property(catch-lib source_dir)
-    set(CATCH_INCLUDE_DIRS ${source_dir}/include CACHE INTERNAL "Path to include folder for Catch")
-  endif(NOT CATCH_FOUND)
+    ExternalProject_Get_Property(catch2-lib source_dir)
+    set(CATCH2_INCLUDE_DIRS ${source_dir}/single_include CACHE INTERNAL "Path to include folder for Catch2")
+  endif(NOT CATCH2_FOUND)
 
   if(NOT APPLE)
-    include_directories(SYSTEM AFTER "${CATCH_INCLUDE_DIRS}")
+    include_directories(SYSTEM AFTER "${CATCH2_INCLUDE_DIRS}")
   else(APPLE)
-    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -isystem \"${CATCH_INCLUDE_DIRS}\"")
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -isystem \"${CATCH2_INCLUDE_DIRS}\"")
   endif(NOT APPLE)
 endif(BUILD_TESTS)
 

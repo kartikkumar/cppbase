@@ -4,7 +4,7 @@
  * See accompanying file LICENSE.md or copy at http://opensource.org/licenses/MIT
  */
 
-#include <catch.hpp>
+#include <catch2/catch.hpp>
 
 #include "cppbase/factorial.hpp"
 

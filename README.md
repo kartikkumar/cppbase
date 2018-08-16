@@ -12,7 +12,7 @@ Features
 
   - General directory structure common to C++ projects
   - Example of CMake module [Findcppbase.cmake](https://github.com/openastro/cmake-modules/blob/master/Modules/Findcppbase.cmake)
-  - Testing framework ([Catch](https://www.github.com/philsquared/Catch "Catch Github repository"))
+  - Testing framework ([Catch2](https://www.github.com/catchorg/Catch2 "Catch2 Github repository"))
   - Install script (`make install`)
   - CPack script for packaging (`make package`)
   - Automatic API documentation ([Doxygen](http://www.doxygen.org "Doxygen homepage"))
@@ -35,7 +35,7 @@ To install this project, please ensure that you have installed the following (in
 
 The following dependency is optional (see `Build options`):
 
-  - [CATCH](https://www.github.com/philsquared/Catch) (unit testing library necessary for `BUILD_TESTS` build option)
+  - [Catch2](https://www.github.com/catchorg/Catch2) (unit testing library necessary for `BUILD_TESTS` build option)
 
 This dependency will be downloaded and configured automagically if not already present locally (requires an internet connection).
 
@@ -98,7 +98,7 @@ This project has been set up with a specific file/folder structure in mind. The 
   - `include`: Project header files (*.hpp)
   - `scripts`: Shell scripts used in [Travis CI](https://travis-ci.org/ "Travis CI homepage") build
   - `src`: Project source files (*.cpp), including `main.cpp`, which contains example main-function for project build
-  - `test`: Project test source files (*.cpp) that are provided to the [Catch](https://www.github.com/philsquared/Catch "Catch Github repository") framework
+  - `test`: Project test source files (*.cpp) that are provided to the [Catch2](https://www.github.com/catchorg/Catch2 "Catch2 Github repository") framework
   - `.travis.yml`: Configuration file for [Travis CI](https://travis-ci.org/ "Travis CI homepage") build, including static analysis using [Coverity Scan](https://scan.coverity.com/ "Coverity Scan homepage") and code coverage using [Coveralls](https://coveralls.io "Coveralls.io homepage")
   - `CMakeLists.txt`: main `CMakelists.txt` file for project (should not need to be modified for basic build)
   - `Dependencies.cmake`: list of dependencies and automated build, triggered if dependency cannot be found locally
