@@ -12,7 +12,7 @@ Features
 
   - General directory structure common to C++ projects
   - Example of CMake module [Findcppbase.cmake](https://github.com/openastro/cmake-modules/blob/master/Modules/Findcppbase.cmake)
-  - Testing framework ([Catch2](https://www.github.com/catchorg/Catch2 "Catch2 Github repository"))
+  - Testing framework ([Catch2](https://www.github.com/catchorg/Catch2 "Catch2 Github repository") or [GTest](https://github.com/google/googletest "Google Test Github repository"))
   - Install script (`make install`)
   - CPack script for packaging (`make package`)
   - Automatic API documentation ([Doxygen](http://www.doxygen.org "Doxygen homepage"))
@@ -36,6 +36,7 @@ To install this project, please ensure that you have installed the following (in
 The following dependency is optional (see `Build options`):
 
   - [Catch2](https://www.github.com/catchorg/Catch2) (unit testing library necessary for `BUILD_TESTS` build option)
+  - [GTest](https://github.com/google/googletest) (alternate unit testing library necessary for `BUILD_TESTS` build option and `TEST_FRAMEWORK="GTest"`)
 
 This dependency will be downloaded and configured automagically if not already present locally (requires an internet connection).
 
@@ -80,6 +81,7 @@ You can pass the following, general command-line options when running CMake:
 The following command is conditional and can only be set if `BUILD_TESTS = ON`:
 
  - `-DBUILD_COVERAGE_ANALYSIS[=ON|OFF (default)]`: build code coverage using [Gcov](https://gcc.gnu.org/onlinedocs/gcc/Gcov.html) and [LCOV](http://ltp.sourceforge.net/coverage/lcov.php) (both must be installed; requires [GCC](https://gcc.gnu.org/) compiler; execute coverage analysis from build-directory using `make coverage`)
+ - `-DTEST_FRAMEWORK=[="GTest"| "Catch2" (default)]`: set test framework for your project.
 
 Pass these options either directly to the `cmake ..` command, e.g., to build the tests:
 

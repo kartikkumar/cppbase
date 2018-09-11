@@ -92,6 +92,10 @@ if(CMAKE_COMPILER_IS_GNUCXX)
     set(CMAKE_CXX_FLAGS         "${CMAKE_CXX_FLAGS} -fprofile-arcs -ftest-coverage")
 endif(CMAKE_COMPILER_IS_GNUCXX)
 
+set(TEST_FRAMEWORK "Catch2" CACHE STRING "Test Framework to use")
+set(TEST_FRAMEWORK_VALUES "Catch2;GTest")
+set_property(CACHE TEST_FRAMEWORK PROPERTY STRINGS ${TEST_FRAMEWORK_VALUES})
+
 include(Dependencies.cmake)
 include(ProjectFiles.cmake)
 include_directories(AFTER "${INCLUDE_PATH}")
@@ -130,10 +134,20 @@ if(BUILD_TESTS)
   set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${TEST_PATH})
 
   add_executable(${TEST_NAME} ${TEST_SRC})
-  if(NOT CATCH2_FOUND)
-    add_dependencies(${TEST_NAME} catch2-lib)
-  endif(NOT CATCH2_FOUND)
+
   target_link_libraries(${TEST_NAME} ${LIB_NAME})
+
+  if(NOT TEST_FRAMEWORK_FOUND)
+    if(TEST_FRAMEWORK STREQUAL "Catch2")
+      add_dependencies(${TEST_NAME} catch2-lib)
+    endif(TEST_FRAMEWORK STREQUAL "Catch2")
+  endif(NOT TEST_FRAMEWORK_FOUND)
+
+  if(TEST_FRAMEWORK STREQUAL "GTest")
+    target_link_libraries(${TEST_NAME} ${TEST_FRAMEWORK_LIB})
+    add_compile_definitions(USE_GTEST)
+  endif(TEST_FRAMEWORK STREQUAL "GTest")
+
   add_test(NAME ${TEST_NAME} COMMAND "${TEST_PATH}/${TEST_NAME}")
 
   if(BUILD_COVERAGE_ANALYSIS)
