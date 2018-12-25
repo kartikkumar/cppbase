@@ -14,7 +14,7 @@ env:
   global:
     # The next declaration is the encrypted COVERITY_SCAN_TOKEN, created
     #   via the "travis encrypt" command using the project repo's public key
-    - secure: "vNAGaVAB7eCZ+3BOVhAZ2IZxqRKI0XqvpIyn8YIF6Fn/bANXyqoB//OPY+CcVsI1eCkexa8ePDIXAVGADZqHEqcZ07prkc1SyQtJfECAjR8wiirk+XfYODaebfyHYnBhcF00Q6+bB8lq2rpPyk2LCtzts30Wd94dE8fIrKm22czKgnKmfnH+tLg5VFlGaff6uTVIrXgtNfE8PDp199ACiEWu1EDQm68lLAD1ekPucAIp0PZYptMBWT2pD5T+cHVyCtt4kOjl7ESqalIxdI9+F9h8UBaLNUctXhGXPHALcC3SVMSzhv7Xsg/vuhf8g3zX9JzYWO/hVzr2/urPdZKSZHAVRGxOB73ORyNwm/PozRYk30nqqn9mFaELgwUXtdRSaXLTEMSdWGmWmDlVyVjo6PMP2Ua8qox40Hgaaa/Cxud38/3zVsYLnlfx+EkzPWfDJU5BTlVnmk2tGX9M3DKoRd1u8rYNhVWb7q8c87TN2WcbIN9ASaHpXvoBjPR+WuMoMiOjwpniVyJdAcn0YB0jf0yFam5DoZfLHoWHisg4W3zYJy08HszqyMZ3GlPRDq9YTqhU8j52MFRb7zYhOXJCVFeAcBj6skv0GzWtkqO2/j7xzq9Kgelzir6vZQfYi6A6IJ9FluWoG9UO4Av+/AECKcHdXoplJqOa7J1X9VwoB9U="
+    - secure: "i0MCd0QkxVVAVMXYQXl0phkzpHvtSvLYJg28CF4fuiT+0jSC7kuaZ6XGCa32cohc2BZP4OmX/MBjoMmPJUNWS+yQ8TEy4Ml3K/LV5MHu25sv/gi/ZI+3Pvl9WoCKfGBCbEPsQdhoLoeG8s6akJonh8IgGGmVXUVDhROy5DhUENg="
   matrix:
     - BUILD_TYPE=Debug TEST_FRAMEWORK=Catch2
     - BUILD_TYPE=Release TEST_FRAMEWORK=Catch2
@@ -27,6 +27,8 @@ matrix:
       env: COVERITY_SCAN_BRANCH_PATTERN=coverity_scan
     - compiler: gcc
       env: COVERITY_SCAN_BRANCH_PATTERN=coverity_scan BUILD_TYPE=Release
+    - compiler: gcc
+      env: COVERITY_SCAN_BRANCH_PATTERN=coverity_scan BUILD_TYPE=Debug TEST_FRAMEWORK=GTest
 
 addons:
   coverity_scan:
@@ -34,7 +36,7 @@ addons:
       name: "kartikkumar/cppbase"
       description: "Build submitted via Travis CI"
     notification_email: me@kartikkumar.com
-    build_command_prepend: "mkdir build; cd build; cmake -DPROJECT_NAME=cppbase -DCMAKE_BUILD_TYPE=$BUILD_TYPE -DBUILD_TESTS=on .."
+    build_command_prepend: "mkdir build; cd build; cmake -DPROJECT_NAME=cppbase -DTEST_FRAMEWORK=$TEST_FRAMEWORK -DCMAKE_BUILD_TYPE=$BUILD_TYPE -DBUILD_TESTS=on .."
     build_command: "make"
     branch_pattern: coverity_scan
 
