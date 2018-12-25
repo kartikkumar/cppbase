@@ -16,8 +16,10 @@ env:
     #   via the "travis encrypt" command using the project repo's public key
     - secure: "vNAGaVAB7eCZ+3BOVhAZ2IZxqRKI0XqvpIyn8YIF6Fn/bANXyqoB//OPY+CcVsI1eCkexa8ePDIXAVGADZqHEqcZ07prkc1SyQtJfECAjR8wiirk+XfYODaebfyHYnBhcF00Q6+bB8lq2rpPyk2LCtzts30Wd94dE8fIrKm22czKgnKmfnH+tLg5VFlGaff6uTVIrXgtNfE8PDp199ACiEWu1EDQm68lLAD1ekPucAIp0PZYptMBWT2pD5T+cHVyCtt4kOjl7ESqalIxdI9+F9h8UBaLNUctXhGXPHALcC3SVMSzhv7Xsg/vuhf8g3zX9JzYWO/hVzr2/urPdZKSZHAVRGxOB73ORyNwm/PozRYk30nqqn9mFaELgwUXtdRSaXLTEMSdWGmWmDlVyVjo6PMP2Ua8qox40Hgaaa/Cxud38/3zVsYLnlfx+EkzPWfDJU5BTlVnmk2tGX9M3DKoRd1u8rYNhVWb7q8c87TN2WcbIN9ASaHpXvoBjPR+WuMoMiOjwpniVyJdAcn0YB0jf0yFam5DoZfLHoWHisg4W3zYJy08HszqyMZ3GlPRDq9YTqhU8j52MFRb7zYhOXJCVFeAcBj6skv0GzWtkqO2/j7xzq9Kgelzir6vZQfYi6A6IJ9FluWoG9UO4Av+/AECKcHdXoplJqOa7J1X9VwoB9U="
   matrix:
-    - BUILD_TYPE=Debug
-    - BUILD_TYPE=Release
+    - BUILD_TYPE=Debug TEST_FRAMEWORK=Catch2
+    - BUILD_TYPE=Release TEST_FRAMEWORK=Catch2
+    - BUILD_TYPE=Debug TEST_FRAMEWORK=GTest
+    - BUILD_TYPE=Release TEST_FRAMEWORK=GTest
 
 matrix:
   exclude:
@@ -49,7 +51,7 @@ script:
   - if [ "$COVERITY_SCAN_BRANCH_PATTERN" != "coverity_scan" ]; then
       mkdir build;
       cd build;
-      $HOME/cmake/bin/cmake -DPROJECT_NAME=cppbase -DCMAKE_BUILD_TYPE=$BUILD_TYPE -DBUILD_TESTS=on -DDOXYGEN_EXECUTABLE=$HOME/doxygen/bin/doxygen -DBUILD_DOXYGEN_DOCS=on ..;
+      $HOME/cmake/bin/cmake -DPROJECT_NAME=cppbase -DCMAKE_BUILD_TYPE=$BUILD_TYPE -DTEST_FRAMEWORK=$TEST_FRAMEWORK -DBUILD_TESTS=on -DDOXYGEN_EXECUTABLE=$HOME/doxygen/build/bin/doxygen -DBUILD_DOXYGEN_DOCS=on ..;
       make;
       ctest -V;
       ../scripts/check_doxygen.sh;

@@ -4,13 +4,14 @@
  * See accompanying file LICENSE.md or copy at http://opensource.org/licenses/MIT
  */
 
-#ifndef USE_GTEST
+#ifdef USE_CATCH2
+
 #define CATCH_CONFIG_MAIN
 
 #include <catch2/catch.hpp>
 
-#else
+#elif USE_GTEST
 
 #include <gtest/gtest.h>
 
-#endif
+#endif // USE_CATCH2

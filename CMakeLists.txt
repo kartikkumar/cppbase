@@ -51,6 +51,11 @@ include(CMakeDependentOption)
 CMAKE_DEPENDENT_OPTION(BUILD_COVERAGE_ANALYSIS "Build code coverage analysis"   OFF
                                                "BUILD_TESTS"                    OFF)
 
+# Define test framework variables.
+set(TEST_FRAMEWORK "Catch2" CACHE STRING "Test Framework to use")
+set(TEST_FRAMEWORK_VALUES "Catch2;GTest")
+set_property(CACHE TEST_FRAMEWORK PROPERTY STRINGS ${TEST_FRAMEWORK_VALUES})
+
 # Set CMake build-type. If it not supplied by the user, the default built type is "Release".
 if(((NOT CMAKE_BUILD_TYPE)
   AND (NOT BUILD_COVERAGE_ANALYSIS))
@@ -91,10 +96,6 @@ if(CMAKE_COMPILER_IS_GNUCXX)
     set(CMAKE_CXX_FLAGS_RELEASE "-O3")
     set(CMAKE_CXX_FLAGS         "${CMAKE_CXX_FLAGS} -fprofile-arcs -ftest-coverage")
 endif(CMAKE_COMPILER_IS_GNUCXX)
-
-set(TEST_FRAMEWORK "Catch2" CACHE STRING "Test Framework to use")
-set(TEST_FRAMEWORK_VALUES "Catch2;GTest")
-set_property(CACHE TEST_FRAMEWORK PROPERTY STRINGS ${TEST_FRAMEWORK_VALUES})
 
 include(Dependencies.cmake)
 include(ProjectFiles.cmake)
@@ -137,18 +138,24 @@ if(BUILD_TESTS)
 
   target_link_libraries(${TEST_NAME} ${LIB_NAME})
 
-  if(NOT TEST_FRAMEWORK_FOUND)
-    if(TEST_FRAMEWORK STREQUAL "Catch2")
-      add_dependencies(${TEST_NAME} catch2-lib)
-    endif(TEST_FRAMEWORK STREQUAL "Catch2")
-  endif(NOT TEST_FRAMEWORK_FOUND)
+  if(TEST_FRAMEWORK STREQUAL "Catch2")
+    add_definitions(-DUSE_CATCH2=TRUE)
+  elseif((TEST_FRAMEWORK STREQUAL "GTest"))
+    add_definitions(-DUSE_GTEST=TRUE)
+  endif(TEST_FRAMEWORK STREQUAL "Catch2")
+
+  if((NOT CATCH2_FOUND) AND (TEST_FRAMEWORK STREQUAL "Catch2"))
+    add_dependencies(${TEST_NAME} catch2-lib)
+  endif((NOT CATCH2_FOUND) AND (TEST_FRAMEWORK STREQUAL "Catch2"))
 
   if(TEST_FRAMEWORK STREQUAL "GTest")
+    if(NOT GTEST_FOUND)
+      add_dependencies(${TEST_NAME} gtest-lib)
+    endif(NOT GTEST_FOUND)
     target_link_libraries(${TEST_NAME} ${TEST_FRAMEWORK_LIB})
-    add_compile_definitions(USE_GTEST)
   endif(TEST_FRAMEWORK STREQUAL "GTest")
 
-  add_test(NAME ${TEST_NAME} COMMAND "${TEST_PATH}/${TEST_NAME}")
+ add_test(NAME ${TEST_NAME} COMMAND "${TEST_PATH}/${TEST_NAME}")
 
   if(BUILD_COVERAGE_ANALYSIS)
     include(CodeCoverage)
@@ -157,7 +164,7 @@ if(BUILD_TESTS)
   endif(BUILD_COVERAGE_ANALYSIS)
 endif(BUILD_TESTS)
 
-# Install header files and library.
+# Install files.
 # Destination is set by CMAKE_INSTALL_PREFIX and defaults to usual locations, unless overridden by
 # user.
 install(DIRECTORY ${INCLUDE_PATH}/${CMAKE_PROJECT_NAME}

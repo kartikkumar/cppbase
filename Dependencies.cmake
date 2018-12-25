@@ -7,7 +7,10 @@ include(ExternalProject)
 
 # -------------------------------
 
+# Set up test framework
+# Frameworks available: Catch2, GTest
 # Catch2: https://github.com/catchorg/Catch2
+# GTest: hhttps://github.com/google/googletest
 
 if(BUILD_TESTS)
   if(NOT BUILD_DEPENDENCIES)
@@ -15,14 +18,14 @@ if(BUILD_TESTS)
       find_package(Catch2)
       set(TEST_FRAMEWORK_INCLUDE_DIRS ${CATCH2_INCLUDE_DIRS})
       set(TEST_FRAMEWORK_LIB Catch2::Catch2)
-    endif(TEST_FRAMEWORK STREQUAL "Catch2")
-    if(TEST_FRAMEWORK STREQUAL "GTest")
+    elseif(TEST_FRAMEWORK STREQUAL "GTest")
+      set(GTEST_ROOT "${PROJECT_PATH};${PROJECT_PATH}/googletest;${PROJECT_PATH}/googletest/googletest;${PROJECT_PATH}/..;${PROJECT_PATH}/../googletest;${PROJECT_PATH}/../googletest/googletest"
+          CACHE PATH "Path to googletest")
       find_package(GTest)
-      set(TEST_FRAMEWORK_INCLUDE_DIRS ${gtest_SOURCE_DIR}/include ${gtest_SOURCE_DIR})
+      set(TEST_FRAMEWORK_INCLUDE_DIRS ${GTEST_INCLUDE_DIRS})
       set(TEST_FRAMEWORK_LIB GTest::Main)
-    endif(TEST_FRAMEWORK STREQUAL "GTest")
+    endif(TEST_FRAMEWORK STREQUAL "Catch2")
   endif(NOT BUILD_DEPENDENCIES)
-
 
   if((TEST_FRAMEWORK STREQUAL "Catch2") AND (NOT CATCH2_FOUND))
     message(STATUS "Catch2 will be downloaded when ${CMAKE_PROJECT_NAME} is built")
@@ -48,15 +51,43 @@ if(BUILD_TESTS)
     set(TEST_FRAMEWORK_LIB catch2-lib)
   endif((TEST_FRAMEWORK STREQUAL "Catch2") AND (NOT CATCH2_FOUND))
 
-  # TODO: Add Download option for GTest
+  if((TEST_FRAMEWORK STREQUAL "GTest") AND (NOT GTEST_FOUND))
+    message(STATUS "GTest will be downloaded when ${CMAKE_PROJECT_NAME} is built")
+    ExternalProject_Add(gtest-lib
+      PREFIX ${EXTERNAL_PATH}/GTest
+      #--Download step--------------
+      URL https://github.com/google/googletest/archive/master.zip
+      TIMEOUT 30
+      #--Update/Patch step----------
+      UPDATE_COMMAND ""
+      PATCH_COMMAND ""
+      #--Configure step-------------
+      SOURCE_DIR ${CMAKE_CURRENT_BINARY_DIR}/gtest
+      CONFIGURE_COMMAND ${CMAKE_COMMAND} -DCMAKE_CXX_STANDARD=${CMAKE_CXX_STANDARD} ${CMAKE_CURRENT_BINARY_DIR}/gtest/googletest
+      #--Build step-----------------
+      BUILD_IN_SOURCE 1
+      #--Install step---------------
+      INSTALL_COMMAND ""
+      #--Output logging-------------
+      LOG_DOWNLOAD ON
+    )
+    ExternalProject_Get_Property(gtest-lib source_dir binary_dir)
+    add_library(gtest_static INTERFACE)
+    add_dependencies(gtest_static gtest-lib)
+    target_link_libraries(gtest_static
+        INTERFACE "${binary_dir}/lib/${CMAKE_FIND_LIBRARY_PREFIXES}gtest_main.a"
+                  "${binary_dir}/lib/${CMAKE_FIND_LIBRARY_PREFIXES}gtest.a")
+    target_include_directories(gtest_static INTERFACE "${source_dir}/googletest/include")
+    set(TEST_FRAMEWORK_INCLUDE_DIRS ${source_dir}/googletest/include CACHE INTERNAL "Path to include folder for GTest")
+    set(TEST_FRAMEWORK_LIB gtest_static)
+    link_directories("${binary_dir}/lib")
+  endif((TEST_FRAMEWORK STREQUAL "GTest") AND (NOT GTEST_FOUND))
 
   if(NOT APPLE)
     include_directories(SYSTEM AFTER "${TEST_FRAMEWORK_INCLUDE_DIRS}")
   else(APPLE)
-    # TODO: Test GTest on APPLE
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -isystem \"${TEST_FRAMEWORK_INCLUDE_DIRS}\"")
   endif(NOT APPLE)
-
 endif(BUILD_TESTS)
 
 # -------------------------------

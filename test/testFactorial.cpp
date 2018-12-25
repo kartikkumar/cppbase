@@ -4,15 +4,15 @@
  * See accompanying file LICENSE.md or copy at http://opensource.org/licenses/MIT
  */
 
-#ifndef USE_GTEST
+#ifdef USE_CATCH2
 
 #include <catch2/catch.hpp>
 
-#else
+#elif USE_GTEST
 
 #include <gtest/gtest.h>
 
-#endif
+#endif // USE_CATCH2
 
 #include "cppbase/factorial.hpp"
 
@@ -21,7 +21,8 @@ namespace cppbase
 namespace tests
 {
 
-#ifndef USE_GTEST
+#ifdef USE_CATCH2
+
 TEST_CASE( "Test factorial function", "[factorial]" )
 {
     REQUIRE_THROWS( computeFactorial( -5 ) );
@@ -30,7 +31,9 @@ TEST_CASE( "Test factorial function", "[factorial]" )
     REQUIRE( computeFactorial( 2 ) == 2 );
     REQUIRE( computeFactorial( 5 ) == 120 );
 }
-#else
+
+#elif USE_GTEST
+
 TEST(Factorial, Unit)
 {
     ASSERT_ANY_THROW( computeFactorial( -5 ) );
@@ -39,6 +42,8 @@ TEST(Factorial, Unit)
     EXPECT_EQ( computeFactorial( 2 ), 2);
     EXPECT_EQ( computeFactorial( 5 ), 120);
 }
-#endif
+
+#endif // USE_CATCH2
+
 } // namespace tests
 } // namespace cppbase

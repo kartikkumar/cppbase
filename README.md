@@ -12,7 +12,7 @@ Features
 
   - General directory structure common to C++ projects
   - Example of CMake module [Findcppbase.cmake](https://github.com/openastro/cmake-modules/blob/master/Modules/Findcppbase.cmake)
-  - Testing framework ([Catch2](https://www.github.com/catchorg/Catch2 "Catch2 Github repository") or [GTest](https://github.com/google/googletest "Google Test Github repository"))
+  - Unit testing framework ([Catch2](https://www.github.com/catchorg/Catch2 "Catch2 Github repository") or [GTest](https://github.com/google/googletest "Google Test Github repository"))
   - Install script (`make install`)
   - CPack script for packaging (`make package`)
   - Automatic API documentation ([Doxygen](http://www.doxygen.org "Doxygen homepage"))
@@ -33,12 +33,12 @@ To install this project, please ensure that you have installed the following (in
   - [Gcov](https://gcc.gnu.org/onlinedocs/gcc/Gcov.html) (optional)
   - [LCOV](http://ltp.sourceforge.net/coverage/lcov.php) (optional)
 
-The following dependency is optional (see `Build options`):
+The following dependencies are optional (see `Build options`):
 
-  - [Catch2](https://www.github.com/catchorg/Catch2) (unit testing library necessary for `BUILD_TESTS` build option)
-  - [GTest](https://github.com/google/googletest) (alternate unit testing library necessary for `BUILD_TESTS` build option and `TEST_FRAMEWORK="GTest"`)
+  - [Catch2](https://www.github.com/catchorg/Catch2) (unit testing library necessary for `BUILD_TESTS` build option, with `TEST_FRAMEWORK=Catch2` (default))
+  - [GTest](https://github.com/google/googletest) (alternate unit testing library necessary for `BUILD_TESTS` build option and `TEST_FRAMEWORK=GTest`)
 
-This dependency will be downloaded and configured automagically if not already present locally (requires an internet connection).
+These dependencies will be downloaded and configured automagically, if not already present locally (requires an internet connection).
 
 Installation
 ------
@@ -78,10 +78,10 @@ You can pass the following, general command-line options when running CMake:
   - `-DBUILD_TESTS[=ON|OFF (default)]`: build tests (execute tests from build-directory using `ctest -V`)
   - `-DBUILD_DEPENDENCIES[=ON|OFF (default)]`: force local build of dependencies, instead of first searching system-wide using `find_package()`
 
-The following command is conditional and can only be set if `BUILD_TESTS = ON`:
+The following commands are conditional and are only relevant if `BUILD_TESTS = ON`:
 
  - `-DBUILD_COVERAGE_ANALYSIS[=ON|OFF (default)]`: build code coverage using [Gcov](https://gcc.gnu.org/onlinedocs/gcc/Gcov.html) and [LCOV](http://ltp.sourceforge.net/coverage/lcov.php) (both must be installed; requires [GCC](https://gcc.gnu.org/) compiler; execute coverage analysis from build-directory using `make coverage`)
- - `-DTEST_FRAMEWORK=[="GTest"| "Catch2" (default)]`: set test framework for your project.
+ - `-DTEST_FRAMEWORK=[=GTest|Catch2 (default)]`: set unit testting framework for your project
 
 Pass these options either directly to the `cmake ..` command, e.g., to build the tests:
 
@@ -99,7 +99,7 @@ This project has been set up with a specific file/folder structure in mind. The 
   - `include`: Project header files (*.hpp)
   - `scripts`: Shell scripts used in [Travis CI](https://travis-ci.org/ "Travis CI homepage") build
   - `src`: Project source files (*.cpp), including `main.cpp`, which contains example main-function for project build
-  - `test`: Project test source files (*.cpp) that are provided to the [Catch2](https://www.github.com/catchorg/Catch2 "Catch2 Github repository") framework
+  - `test`: Project test source files (*.cpp) that are provided to the selecting unit testing framework
   - `.travis.yml`: Configuration file for [Travis CI](https://travis-ci.org/ "Travis CI homepage") build, including static analysis using [Coverity Scan](https://scan.coverity.com/ "Coverity Scan homepage") and code coverage using [Coveralls](https://coveralls.io "Coveralls.io homepage")
   - `CMakeLists.txt`: main `CMakelists.txt` file for project (should not need to be modified for basic build)
   - `Dependencies.cmake`: list of dependencies and automated build, triggered if dependency cannot be found locally
