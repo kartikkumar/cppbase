@@ -152,7 +152,7 @@ if(BUILD_TESTS)
     if(NOT GTEST_FOUND)
       add_dependencies(${TEST_NAME} gtest-lib)
     endif(NOT GTEST_FOUND)
-    target_link_libraries(${TEST_NAME} ${TEST_FRAMEWORK_LIB})
+    target_link_libraries(${TEST_NAME} ${TEST_FRAMEWORK_LIB} Threads::Threads)
   endif(TEST_FRAMEWORK STREQUAL "GTest")
 
  add_test(NAME ${TEST_NAME} COMMAND "${TEST_PATH}/${TEST_NAME}")

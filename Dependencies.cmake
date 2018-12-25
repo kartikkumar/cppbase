@@ -7,10 +7,22 @@ include(ExternalProject)
 
 # -------------------------------
 
+# https://computing.llnl.gov/tutorials/pthreads
+# Required for GTest.
+
+if(TEST_FRAMEWORK STREQUAL "GTest")
+  find_package (Threads REQUIRED)
+endif(TEST_FRAMEWORK STREQUAL "GTest")
+
+# -------------------------------
+
+# -------------------------------
+
 # Set up test framework
 # Frameworks available: Catch2, GTest
 # Catch2: https://github.com/catchorg/Catch2
 # GTest: hhttps://github.com/google/googletest
+
 
 if(BUILD_TESTS)
   if(NOT BUILD_DEPENDENCIES)
