@@ -6,6 +6,11 @@
 set -ev
 
 # Fetch and build updated version of Doxygen from source.
-wget http://ftp.stack.nl/pub/users/dimitri/doxygen-1.8.11.linux.bin.tar.gz
-tar -xzvf doxygen-1.8.11.linux.bin.tar.gz
-mv doxygen-1.8.11 $HOME/doxygen
+wget https://github.com/doxygen/doxygen/archive/Release_1_8_14.zip
+unzip Release_1_8_14.zip
+mv doxygen-Release_1_8_14 $HOME/doxygen
+cd $HOME/doxygen
+mkdir build
+cd build
+cmake -G "Unix Makefiles" ..
+make
