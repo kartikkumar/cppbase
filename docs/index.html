@@ -96,7 +96,7 @@ $(document).ready(function(){initNavTree('index.html','');});
 <ul>
 <li>General directory structure common to C++ projects</li>
 <li>Example of CMake module <a href="https://github.com/openastro/cmake-modules/blob/master/Modules/Findcppbase.cmake">Findcppbase.cmake</a></li>
-<li>Testing framework (<a href="https://www.github.com/catchorg/Catch2" title="Catch2 Github repository">Catch2</a>)</li>
+<li>Unit testing framework (<a href="https://www.github.com/catchorg/Catch2" title="Catch2 Github repository">Catch2</a> or <a href="https://github.com/google/googletest" title="Google Test Github repository">GTest</a>)</li>
 <li>Install script (<code>make install</code>)</li>
 <li>CPack script for packaging (<code>make package</code>)</li>
 <li>Automatic API documentation (<a href="http://www.doxygen.org" title="Doxygen homepage">Doxygen</a>)</li>
@@ -115,11 +115,12 @@ $(document).ready(function(){initNavTree('index.html','');});
 <li><a href="https://gcc.gnu.org/onlinedocs/gcc/Gcov.html">Gcov</a> (optional)</li>
 <li><a href="http://ltp.sourceforge.net/coverage/lcov.php">LCOV</a> (optional)</li>
 </ul>
-<p>The following dependency is optional (see <code>Build options</code>):</p>
+<p>The following dependencies are optional (see <code>Build options</code>):</p>
 <ul>
-<li><a href="https://www.github.com/catchorg/Catch2">Catch2</a> (unit testing library necessary for <code>BUILD_TESTS</code> build option)</li>
+<li><a href="https://www.github.com/catchorg/Catch2">Catch2</a> (unit testing library necessary for <code>BUILD_TESTS</code> build option, with <code>TEST_FRAMEWORK=Catch2</code> (default))</li>
+<li><a href="https://github.com/google/googletest">GTest</a> (alternate unit testing library necessary for <code>BUILD_TESTS</code> build option and <code>TEST_FRAMEWORK=GTest</code>)</li>
 </ul>
-<p>This dependency will be downloaded and configured automagically if not already present locally (requires an internet connection).</p>
+<p>These dependencies will be downloaded and configured automagically, if not already present locally (requires an internet connection).</p>
 <h2>Installation </h2>
 <p>Run the following commands to download, build, and install this project. Substitute <code>project_name</code> with the name of your project (if you leave it out, the repository will be cloned to a local folder called <code>cppbase</code>). This will customize the project targets for you. Note that <code>project_name</code> must not contain spaces! The <code>--depth 1</code> parameter passed to <code>git clone</code> ensures that the git history is not downloaded. In case you would like to preserve the history of this project, omit that option. </p><pre class="fragment">git clone https://www.github.com/kartikkumar/cppbase --depth 1 &lt;project_name&gt;
 cd &lt;project_name&gt;
@@ -143,9 +144,10 @@ cmake -DPROJECT_NAME=&lt;project_name&gt; .. &amp;&amp; cmake --build .
 <li><code>-DBUILD_TESTS[=ON|OFF (default)]</code>: build tests (execute tests from build-directory using <code>ctest -V</code>)</li>
 <li><code>-DBUILD_DEPENDENCIES[=ON|OFF (default)]</code>: force local build of dependencies, instead of first searching system-wide using <code>find_package()</code></li>
 </ul>
-<p>The following command is conditional and can only be set if <code>BUILD_TESTS = ON</code>:</p>
+<p>The following commands are conditional and are only relevant if <code>BUILD_TESTS = ON</code>:</p>
 <ul>
 <li><code>-DBUILD_COVERAGE_ANALYSIS[=ON|OFF (default)]</code>: build code coverage using <a href="https://gcc.gnu.org/onlinedocs/gcc/Gcov.html">Gcov</a> and <a href="http://ltp.sourceforge.net/coverage/lcov.php">LCOV</a> (both must be installed; requires <a href="https://gcc.gnu.org/">GCC</a> compiler; execute coverage analysis from build-directory using <code>make coverage</code>)</li>
+<li><code>-DTEST_FRAMEWORK=[=GTest|Catch2 (default)]</code>: set unit testting framework for your project</li>
 </ul>
 <p>Pass these options either directly to the <code>cmake ..</code> command, e.g., to build the tests: </p><pre class="fragment">cmake -DPROJECT_NAME=&lt;project_name&gt; -DBUILD_TESTS=on ..
 </pre><p>N.B.: Toggling options to build tests using <code>ccmake</code> does not work correctly, as the necessarily libraries are not downloaded automagically!</p>
@@ -157,7 +159,7 @@ cmake -DPROJECT_NAME=&lt;project_name&gt; .. &amp;&amp; cmake --build .
 <li><code>include</code>: Project header files (*.hpp)</li>
 <li><code>scripts</code>: Shell scripts used in <a href="https://travis-ci.org/" title="Travis CI homepage">Travis CI</a> build</li>
 <li><code>src</code>: Project source files (*.cpp), including <code>main.cpp</code>, which contains example main-function for project build</li>
-<li><code>test</code>: Project test source files (*.cpp) that are provided to the <a href="https://www.github.com/catchorg/Catch2" title="Catch2 Github repository">Catch2</a> framework</li>
+<li><code>test</code>: Project test source files (*.cpp) that are provided to the selecting unit testing framework</li>
 <li><code>.travis.yml</code>: Configuration file for <a href="https://travis-ci.org/" title="Travis CI homepage">Travis CI</a> build, including static analysis using <a href="https://scan.coverity.com/" title="Coverity Scan homepage">Coverity Scan</a> and code coverage using <a href="https://coveralls.io" title="Coveralls.io homepage">Coveralls</a></li>
 <li><code>CMakeLists.txt</code>: main <code>CMakelists.txt</code> file for project (should not need to be modified for basic build)</li>
 <li><code>Dependencies.cmake</code>: list of dependencies and automated build, triggered if dependency cannot be found locally</li>
@@ -187,7 +189,7 @@ cmake -DPROJECT_NAME=&lt;project_name&gt; .. &amp;&amp; cmake --build .
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Thu Aug 23 2018 16:11:48 for cppbase by
+    <li class="footer">Generated on Tue Dec 25 2018 16:31:00 for cppbase by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.14 </li>
   </ul>
