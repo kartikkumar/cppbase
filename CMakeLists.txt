@@ -173,6 +173,17 @@ install(DIRECTORY ${INCLUDE_PATH}/${CMAKE_PROJECT_NAME}
 install(TARGETS ${LIB_NAME} DESTINATION lib)
 install(TARGETS ${BIN_NAME} DESTINATION bin)
 
+# Uninstall files.
+if(NOT TARGET uninstall)
+    configure_file(
+        "${CMAKE_CURRENT_SOURCE_DIR}/Uninstall.cmake.in"
+        "${CMAKE_CURRENT_BINARY_DIR}/Uninstall.cmake"
+        IMMEDIATE @ONLY)
+
+    add_custom_target(uninstall
+        COMMAND ${CMAKE_COMMAND} -P ${CMAKE_CURRENT_BINARY_DIR}/Uninstall.cmake)
+endif()
+
 # Set up packager.
 set(CPACK_PACKAGE_DESCRIPTION_SUMMARY "${CMAKE_PROJECT_NAME}")
 set(CPACK_PACKAGE_VENDOR              "${CMAKE_PROJECT_NAME}_VENDOR_NAME")
