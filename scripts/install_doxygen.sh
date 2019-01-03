@@ -6,9 +6,9 @@
 set -ev
 
 # Fetch and build updated version of Doxygen from source.
-wget https://github.com/doxygen/doxygen/archive/Release_1_8_14.zip
-unzip Release_1_8_14.zip
-mv doxygen-Release_1_8_14 $HOME/doxygen
+wget https://github.com/doxygen/doxygen/archive/Release_1_8_15.zip
+unzip Release_1_8_15.zip
+mv doxygen-Release_1_8_15 $HOME/doxygen
 cd $HOME/doxygen
 mkdir build
 cd build
