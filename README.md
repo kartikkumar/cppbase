@@ -14,6 +14,7 @@ Features
   - Example of CMake module [Findcppbase.cmake](https://github.com/openastro/cmake-modules/blob/master/Modules/Findcppbase.cmake)
   - Unit testing framework ([Catch2](https://www.github.com/catchorg/Catch2 "Catch2 Github repository") or [GTest](https://github.com/google/googletest "Google Test Github repository"))
   - Install script (`make install`)
+  - Uninstall script (`make uninstall`)
   - CPack script for packaging (`make package`)
   - Automatic API documentation ([Doxygen](http://www.doxygen.org "Doxygen homepage"))
   - Continuous Integration ([Travis CI](https://travis-ci.org/ "Travis CI homepage"))
@@ -57,11 +58,17 @@ To push this project to your own remote repository, you can run the following co
 
 This rewrites the last commit and ensures that you can then push the repository to a remote (e.g., Github, BitBucket, Gitlab, etc.).
 
-To install the header files, run the following from within the `build` directory:
+To install the header files and libraries, run the following from within the `build` directory:
 
     make install
 
 Note that dependencies are installed by fetching them online, in case they cannot be detected on your local system. If the build process fails, check the error log given. Typically, building fails due to timeout. Simply run the `cmake --build .` command once more.
+
+To uninstall all the files that were installed on your system, run the following from within the `build` directory:
+
+    make uninstall
+
+Note that this does not remove any dependencies that were automagically fetched and built.
 
 Build options
 -------------
@@ -106,7 +113,8 @@ This project has been set up with a specific file/folder structure in mind. The 
   - `Doxyfile.in`: [Doxygen](http://www.doxygen.org "Doxygen homepage") configuration file, adapted for generic use within project build (should not need to be modified)
   - `LICENSE.md`: license file for project (copyright statement needs to be edited)
   - `ProjectFiles.cmake`: list of project source files to build
-  - `README.md`: project readme file, parsed as main page for [Doxygen](http://www.doxygen.org "Doxygen homepage") documentation
+  - `Uninstall.cmake.in`: uninstall configuration scrip, necessary for the `make uninstall` target
+
 
 Contributing
 ------------
@@ -123,12 +131,3 @@ Disclaimer
 ------------
 
 The copyright holders are not liable for any damage(s) incurred due to improper use of `cppbase`.
-
-TODO
-------------
-
-@todo Find a way to have nested variables in `Doxygen` config file so that e.g., `@@CMAKE_PROJECT_NAME@_VERSION@` works.
-
-@todo Add version detection in `CMake` module so that find_package respects minimum version required.
-
-@todo Find a way to remove \cond \endcond workaround to get Doxygen to not throw warnings in readme.
