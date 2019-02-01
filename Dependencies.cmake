@@ -24,7 +24,7 @@ endif(TEST_FRAMEWORK STREQUAL "GTest")
 # GTest: hhttps://github.com/google/googletest
 
 
-if(BUILD_TESTS)
+if(BUILD_TESTING)
   if(NOT BUILD_DEPENDENCIES)
     if(TEST_FRAMEWORK STREQUAL "Catch2")
       find_package(Catch2)
@@ -100,6 +100,6 @@ if(BUILD_TESTS)
   else(APPLE)
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -isystem \"${TEST_FRAMEWORK_INCLUDE_DIRS}\"")
   endif(NOT APPLE)
-endif(BUILD_TESTS)
+endif(BUILD_TESTING)
 
 # -------------------------------

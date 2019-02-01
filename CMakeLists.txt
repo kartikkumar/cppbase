@@ -44,12 +44,13 @@ set(TEST_NAME                                  "test_${PROJECT_NAME}")
 
 OPTION(BUILD_MAIN                              "Build main function"            ON)
 OPTION(BUILD_DOXYGEN_DOCS                      "Build Doxygen docs"             OFF)
-OPTION(BUILD_TESTS                             "Build tests"                    OFF)
 OPTION(BUILD_DEPENDENCIES                      "Force build of dependencies"    OFF)
+
+include(CTest)
 
 include(CMakeDependentOption)
 CMAKE_DEPENDENT_OPTION(BUILD_COVERAGE_ANALYSIS "Build code coverage analysis"   OFF
-                                               "BUILD_TESTS"                    OFF)
+                                               "BUILD_TESTING"                  OFF)
 
 # Define test framework variables.
 set(TEST_FRAMEWORK "Catch2" CACHE STRING "Test Framework to use")
@@ -130,8 +131,7 @@ if(BUILD_DOXYGEN_DOCS)
                     SOURCES ${PROJECT_BINARY_DIR}/Doxyfile)
 endif(BUILD_DOXYGEN_DOCS)
 
-if(BUILD_TESTS)
-  enable_testing()
+if(BUILD_TESTING)
   set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${TEST_PATH})
 
   add_executable(${TEST_NAME} ${TEST_SRC})
@@ -162,7 +162,7 @@ if(BUILD_TESTS)
     set(COVERAGE_EXTRACT '${PROJECT_PATH}/include/*' '${PROJECT_PATH}/src/*')
     setup_target_for_coverage(coverage "${TEST_NAME}" coverage)
   endif(BUILD_COVERAGE_ANALYSIS)
-endif(BUILD_TESTS)
+endif(BUILD_TESTING)
 
 # Install files.
 # Destination is set by CMAKE_INSTALL_PREFIX and defaults to usual locations, unless overridden by

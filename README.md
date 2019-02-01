@@ -36,8 +36,8 @@ To install this project, please ensure that you have installed the following (in
 
 The following dependencies are optional (see `Build options`):
 
-  - [Catch2](https://www.github.com/catchorg/Catch2) (unit testing library necessary for `BUILD_TESTS` build option, with `TEST_FRAMEWORK=Catch2` (default))
-  - [GTest](https://github.com/google/googletest) (alternate unit testing library necessary for `BUILD_TESTS` build option and `TEST_FRAMEWORK=GTest`)
+  - [Catch2](https://www.github.com/catchorg/Catch2) (unit testing library necessary for `BUILD_TESTING` build option, with `TEST_FRAMEWORK=Catch2` (default))
+  - [GTest](https://github.com/google/googletest) (alternate unit testing library necessary for `BUILD_TESTING` build option and `TEST_FRAMEWORK=GTest`)
 
 These dependencies will be downloaded and configured automagically, if not already present locally (requires an internet connection).
 
@@ -82,17 +82,17 @@ You can pass the following, general command-line options when running CMake:
   - `-DBUILD_SHARED_LIBS=[ON|OFF (default)]`: build shared libraries instead of static
   - `-DBUILD_MAIN[=ON|OFF (default)]`: build the main-function
   - `-DBUILD_DOXYGEN_DOCS[=ON|OFF (default)]`: build the [Doxygen](http://www.doxygen.org "Doxygen homepage") documentation ([LaTeX](http://www.latex-project.org/) must be installed with `amsmath` package)
-  - `-DBUILD_TESTS[=ON|OFF (default)]`: build tests (execute tests from build-directory using `ctest -V`)
+  - `-DBUILD_TESTING[=ON (default)|OFF]`: build tests (execute tests from build-directory using `ctest -V`)
   - `-DBUILD_DEPENDENCIES[=ON|OFF (default)]`: force local build of dependencies, instead of first searching system-wide using `find_package()`
 
-The following commands are conditional and are only relevant if `BUILD_TESTS = ON`:
+The following commands are conditional and are only relevant if `BUILD_TESTING = ON`:
 
  - `-DBUILD_COVERAGE_ANALYSIS[=ON|OFF (default)]`: build code coverage using [Gcov](https://gcc.gnu.org/onlinedocs/gcc/Gcov.html) and [LCOV](http://ltp.sourceforge.net/coverage/lcov.php) (both must be installed; requires [GCC](https://gcc.gnu.org/) compiler; execute coverage analysis from build-directory using `make coverage`)
  - `-DTEST_FRAMEWORK=[=GTest|Catch2 (default)]`: set unit testting framework for your project
 
 Pass these options either directly to the `cmake ..` command, e.g., to build the tests:
 
-    cmake -DPROJECT_NAME=<project_name> -DBUILD_TESTS=on ..
+    cmake -DPROJECT_NAME=<project_name> -DBUILD_TESTING=on ..
 
 N.B.: Toggling options to build tests using `ccmake` does not work correctly, as the necessarily libraries are not downloaded automagically!
 
