@@ -17,7 +17,7 @@ const int computeFactorial( const int integerNumber )
 {
 	if ( integerNumber < 0 )
 	{
-		std::ostringstream errorMessage;
+		std::iostringstream errorMessage;
 		errorMessage << "ERROR: (" << integerNumber << "!) is undefined!" << std::endl;
 		throw std::runtime_error( errorMessage.str( ) );
 	}
