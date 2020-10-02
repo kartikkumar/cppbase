@@ -25,9 +25,9 @@ int main( const int numberOfInputs, const char* inputArguments[ ] )
 	try
 	{
 		const int factorial = cppbase::computeFactorial( -5 );
-		std::cout << "5! = " << factorial << std::endl;
+		std::cout << "(-5)! = " << factorial << std::endl;
 	}
-	catch( std::exception& error )
+	catch( std::exception & error )
 	{
 		std::cout << error.what( ) << std::endl;
 	}
