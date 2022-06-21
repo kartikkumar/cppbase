@@ -1,3 +1,0 @@
-[submodule "cmake"]
-	path = cmake
-	url = https://www.github.com/openastro/cmake-modules

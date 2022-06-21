@@ -4,9 +4,6 @@
  * See accompanying file LICENSE.md or copy at http://opensource.org/licenses/MIT
  */
 
-#ifndef CPPBASE_HPP
-#define CPPBASE_HPP
+#pragma once
 
 #include "cppbase/factorial.hpp"
-
-#endif // CPPBASE_HPP
