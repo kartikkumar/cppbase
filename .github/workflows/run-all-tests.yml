@@ -1,0 +1,25 @@
+name: run-all-tests
+on:
+  push:
+    branches:
+      - main
+jobs:
+  run-tests:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2.4.2
+      - name: Setup CMake
+        uses: jwlawson/actions-setup-cmake@v1.12
+        with:
+        cmake-version: '3.23.x'
+      - name: Build CMake project
+        run: |
+          cmake -S . -B build
+          cmake --build build
+      - name: Run tests
+        run: make -C build test
+
+
+
+
