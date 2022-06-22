@@ -9,7 +9,7 @@ jobs:
       - name: Setup CMake
         uses: jwlawson/actions-setup-cmake@v1.12
         with:
-        cmake-version: '3.23.x'
+          cmake-version: '3.23.x'
       - name: Build CMake project
         run: |
           cmake -S . -B build
