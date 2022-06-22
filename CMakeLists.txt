@@ -18,7 +18,7 @@ endif()
 project(
     cppbase
     VERSION 1.0
-    DESCRIPTION "A C++ scaffolding project"
+    DESCRIPTION "A C++ template project"
     LANGUAGES   CXX
     )
 
