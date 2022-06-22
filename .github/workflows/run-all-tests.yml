@@ -12,7 +12,7 @@ jobs:
           cmake-version: '3.23.x'
       - name: Build CMake project
         run: |
-          cmake -S . -B build
+          cmake -S . -B build -DBUILD_TESTING=on
           cmake --build build
       - name: Run tests
         run: make -C build test
