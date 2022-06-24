@@ -1,8 +1,5 @@
 name: run-all-tests
-on:
-  push:
-    branches:
-      - main
+on: [push]
 jobs:
   run-tests:
     runs-on: ubuntu-latest
