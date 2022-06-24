@@ -1,6 +1,6 @@
-# Copyright (c) <year> <author> (<email>)
+# Copyright (c) 2014-2022 Kartik Kumar (me@kartikkumar.com)
 # Distributed under the MIT License.
-# See accompanying file LICENSE.md or copy at http://opensource.org/licenses/MIT
+# See accompanying file LICENSE or copy at http://opensource.org/licenses/MIT
 
 # The CMake setup for this project is based off of the following source:
 # - https://cliutils.gitlab.io/modern-cmake
@@ -47,11 +47,24 @@ configure_file (
 add_subdirectory(src)
 add_subdirectory(apps)
 
+# Include package that allows for dependent user options
+include(CMakeDependentOption)
+
 # Enable testing
 if(BUILD_TESTING)
     include(CTest)
     add_subdirectory(tests)
 endif(BUILD_TESTING)
+
+# Build Doxygen docs
+if(BUILD_DOCS)
+    find_package(Doxygen OPTIONAL_COMPONENTS dot)
+    if(Doxygen_FOUND)
+        add_subdirectory(docs)
+    else()
+        message(STATUS "Doxygen not found, not building docs")
+    endif(Doxygen_FOUND)
+endif(BUILD_DOCS)
 
 # Set up uninstall target to enable 'make uninstall'
 # Source: https://gitlab.kitware.com/cmake/community/-/wikis/FAQ#can-i-do-make-uninstall-with-cmake

@@ -1,7 +1,7 @@
 /*
- * Copyright (c) <year> <author> (<email>)
+ * Copyright (c) 2014-2022 Kartik Kumar (me@kartikkumar.com)
  * Distributed under the MIT License.
- * See accompanying file LICENSE.md or copy at http://opensource.org/licenses/MIT
+ * See accompanying file LICENSE or copy at http://opensource.org/licenses/MIT
  */
 
 #include <catch2/catch_test_macros.hpp>

@@ -1,6 +1,6 @@
-# Copyright (c) <year> <author> (<email>)
+# Copyright (c) 2014-2022 Kartik Kumar (me@kartikkumar.com)
 # Distributed under the MIT License.
-# See accompanying file LICENSE.md or copy at http://opensource.org/licenses/MIT
+# See accompanying file LICENSE or copy at http://opensource.org/licenses/MIT
 
 # The CMake setup for this project is based off of the following source:
 # - https://cliutils.gitlab.io/modern-cmake
