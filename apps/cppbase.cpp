@@ -11,7 +11,7 @@
 
 int main( const int numberOfInputs, const char* inputArguments[ ] )
 {
-	const int factorial = cppbase::computeFactorial( 10 );
+	const int factorial = cppbase::computeFactorial(10);
 	std::cout << "10! = " << factorial << std::endl;
     std::cout << "Hello!" << std::endl;
 	return EXIT_SUCCESS;

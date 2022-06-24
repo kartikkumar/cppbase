@@ -19,7 +19,7 @@ project(
     cppbase
     VERSION 1.0
     DESCRIPTION "A C++ template project"
-    LANGUAGES   CXX
+    LANGUAGES CXX
     )
 
 # Require out-of-source builds
