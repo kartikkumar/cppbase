@@ -19,7 +19,3 @@ jobs:
           cmake --build build
       - name: Run tests
         run: make -C build test
-
-
-
-
