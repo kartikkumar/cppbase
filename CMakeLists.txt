@@ -42,13 +42,12 @@ configure_file (
     "${PROJECT_BINARY_DIR}/include/${project_name}/version.hpp"
 )
 
-# Add subdirs for sources and executables
+# Add subdirs for sources, and executables
 # Subdirs contain CMakeLists.txt files with commands to setup build
 add_subdirectory(src)
 add_subdirectory(apps)
-
-# Include package that allows for dependent user options
-include(CMakeDependentOption)
+# Uncomment the following line if the library is header-only and comment 'add_subdirectory(src)' above
+#add_subdirectory(include)
 
 # Enable testing
 if(BUILD_TESTING)
