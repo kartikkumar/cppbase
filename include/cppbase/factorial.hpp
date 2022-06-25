@@ -16,6 +16,6 @@ namespace cppbase
  * @param[in]  integerNumber Integer number to compute factorial of
  * @return                   Value of factorial of integer
  */
-int computeFactorial( const int integerNumber );
+int computeFactorial(const int integerNumber);
 
 } // namespace cppbase

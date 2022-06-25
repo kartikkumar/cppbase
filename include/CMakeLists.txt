@@ -6,5 +6,6 @@
 # - https://cliutils.gitlab.io/modern-cmake
 
 # Add interface library for a header-only library
+# Uncomment add_subdirectory(include) to enable this
 add_library(cppbase_lib INTERFACE)
 target_include_directories(cppbase_lib INTERFACE .)
