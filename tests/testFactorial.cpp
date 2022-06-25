@@ -13,12 +13,12 @@ namespace cppbase
 namespace tests
 {
 
-TEST_CASE( "Compute factorials", "[factorial]" )
+TEST_CASE("Compute factorials", "[factorial]")
 {
-    REQUIRE( computeFactorial(1) == 1 );
-    REQUIRE( computeFactorial(2) == 2 );
-    REQUIRE( computeFactorial(3) == 6 );
-    REQUIRE( computeFactorial(10) == 3628800 );
+    REQUIRE(computeFactorial(1) == 1);
+    REQUIRE(computeFactorial(2) == 2);
+    REQUIRE(computeFactorial(3) == 6);
+    REQUIRE(computeFactorial(10) == 3628800);
 }
 
 } // namespace tests

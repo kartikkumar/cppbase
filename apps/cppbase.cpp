@@ -9,7 +9,7 @@
 
 #include "cppbase/cppbaseAll.hpp"
 
-int main( const int numberOfInputs, const char* inputArguments[ ] )
+int main(const int numberOfInputs, const char* inputArguments[])
 {
 	const int factorial = cppbase::computeFactorial(10);
 	std::cout << "10! = " << factorial << std::endl;

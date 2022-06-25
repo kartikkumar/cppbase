@@ -7,7 +7,7 @@
 #include <cstdlib>
 #include <iostream>
 
-int main( const int numberOfInputs, const char* inputArguments[ ] )
+int main(const int numberOfInputs, const char* inputArguments[ ])
 {
     std::cout << "Hello World!" << std::endl;
 	return EXIT_SUCCESS;

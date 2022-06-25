@@ -9,13 +9,18 @@
 # @TODO: add find_package call to use Catch2 that is already present and only fetch otherwise
 # @TODO: consider only using the Catch2 single header to avoid building the whole library (slow)
 
-# Fetch Catch2 testing library
-FetchContent_Declare(
-  Catch2
-  GIT_REPOSITORY https://github.com/catchorg/Catch2.git
-  GIT_TAG        v3.0.1 # or a later release
-)
-FetchContent_MakeAvailable(Catch2)
+find_package(Catch2 3 REQUIRED)
+if(TARGET Catch2::Catch2)
+  message(STATUS "Found Catch2")
+else()
+  # Fetch Catch2 testing library
+  FetchContent_Declare(
+    Catch2
+    GIT_REPOSITORY https://github.com/catchorg/Catch2.git
+    GIT_TAG        v3.0.1 # or a later release
+  )
+  FetchContent_MakeAvailable(Catch2)
+endif(TARGET Catch2::Catch2)
 
 # Add test executables and linked libraries
 add_executable(cppbase_tests testFactorial.cpp)
