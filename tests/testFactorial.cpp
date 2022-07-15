@@ -19,6 +19,8 @@ TEST_CASE("Compute factorials", "[factorial]")
     REQUIRE(computeFactorial(2) == 2);
     REQUIRE(computeFactorial(3) == 6);
     REQUIRE(computeFactorial(10) == 3628800);
+
+    // @TODO: find a way to test assert statement in computeFactorial()
 }
 
 } // namespace tests

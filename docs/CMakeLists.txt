@@ -1,4 +1,4 @@
-# Update Doxygen settings for the project
+# Set Doxygen settings for the project
 set(DOXYGEN_OUTPUT_DIRECTORY "${PROJECT_SOURCE_DIR}/docs" )
 set(DOXYGEN_REPEAT_BRIEF NO)
 set(DOXYGEN_FULL_PATH_NAMES NO)

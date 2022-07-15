@@ -19,6 +19,7 @@ FetchContent_MakeAvailable(Catch2)
 
 # Add test executables and linked libraries
 add_executable(cppbase_tests testFactorial.cpp)
+target_compile_features(cppbase_tests PRIVATE cxx_std_11)
 target_link_libraries(cppbase_tests PRIVATE cppbase_lib Catch2::Catch2WithMain)
 
 # Register tests in CTest

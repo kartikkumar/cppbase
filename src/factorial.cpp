@@ -12,7 +12,7 @@ namespace cppbase
 {
 
 //! Compute factorial.
-int computeFactorial( const int integerNumber )
+int computeFactorial(const int integerNumber)
 {
 	assert(integerNumber >= 0);
 	return (integerNumber == 0) ? 1 : integerNumber * computeFactorial(integerNumber-1);

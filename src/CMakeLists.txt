@@ -20,7 +20,7 @@ file(GLOB HEADER_LIST CONFIGURE_DEPENDS "${PROJECT_SOURCE_DIR}/include/cppbase/*
 
 # Make an automatic library - will be static or dynamic based on user setting
 # Note that headers are optional, and do not affect add_library, but they will not
-# show up in IDEs unless they are listed in add_library.
+# show up in IDEs unless they are listed in add_library
 add_library(
   cppbase_lib
   ${SOURCE_LIST}

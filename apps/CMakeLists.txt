@@ -5,7 +5,7 @@
 # The CMake setup for this project is based off of the following source:
 # - https://cliutils.gitlab.io/modern-cmake
 
-# Create executables and link necessary libraries for each app in this file
+# Create executables and link necessary libraries for each application
 
 # Set up main application
 add_executable(cppbase cppbase.cpp)
