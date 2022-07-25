@@ -2,8 +2,8 @@
 # Distributed under the MIT License.
 # See accompanying file LICENSE or copy at http://opensource.org/licenses/MIT
 
-# This workflow is based off of the following sources:
-# -
+# This workflow is based off of the GitHub Actions documentation:
+# - https://docs.github.com/en/actions
 
 name: run-all-tests
 on: [push]
